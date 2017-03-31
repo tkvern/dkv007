@@ -10,23 +10,23 @@ namespace App\Traits;
 
 Trait JsonResponse
 {
-    protected  function successJsonResponse($data=null, $statusCode=200)
+    protected function successJsonResponse(array $data=null, $statusCode=200)
     {
         $ret = [
             'err_code' => '0',
             'err_msg' => 'SUCCESS',
         ];
         if (!is_null($data)) {
-            $ret['data'] = $data;
+            $ret = array_merge($ret, $data);
         }
         return response()->json($ret, $statusCode);
     }
 
-    protected function errorJsonResponse($errCode, $statusCode=200, $errors=null)
+    protected function errorJsonResponse($errCode, $errors, $statusCode)
     {
         return response()->json([
             'err_code' => $errCode,
-            'err_msg' => $errors ?: ErrCode::errorMessage($errCode),
+            'err_msg' => $errors,
         ], $statusCode);
     }
 

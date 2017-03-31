@@ -44,6 +44,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($request->wantsJson() || starts_with($request->path(), 'api')) {
+            return $this->apiExceptionRender($request, $exception);
+        }
         return parent::render($request, $exception);
     }
 
@@ -56,10 +59,36 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
-
         return redirect()->guest(route('login'));
+    }
+
+    protected  function apiExceptionRender($request, Exception $e) {
+        $e = $this->prepareException($e);
+
+        if ($e instanceof HttpResponseException) {
+            return response()->json([
+                'err_code' => $e->getCode().'',
+                'err_msg' => $e->getMessage(),
+            ]);
+        } elseif ($e instanceof AuthenticationException) {
+            return response()->json([
+                'err_code' => '401',
+                'err_msg' => 'Unauthenticated.' ,
+            ]);
+        } elseif ($e instanceof ValidationException) {
+            $errors = $e->validator->errors()->getMessages();
+            $flat_errors = [];
+            foreach($errors as $err) {
+                array_push($flat_errors, $err[0]);
+            }
+            return response()->json([
+                'err_code' => '422',
+                'err_msg' => implode(', ', $flat_errors)
+            ]);
+        }
+        return response()->json([
+            'err_code' => '400',
+            'err_msg' => $e->getMessage(),
+        ]);
     }
 }
