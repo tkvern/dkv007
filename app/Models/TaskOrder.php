@@ -15,11 +15,16 @@ class TaskOrder extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getOrderSN() {
-        $choiceOne = chr(rand(65, 90));
-        $choiceTwo = chr(rand(65, 90));
-        $choiceThree = rand(0, 9);
-        $choiceFour = rand(0, 9);
-        return $choiceOne.$choiceTwo.date('ymdHis').$choiceThree.$choiceFour;
+    public static function genOrderSN() {
+        while(True) {
+            $choiceOne = chr(rand(65, 90));
+            $choiceTwo = chr(rand(65, 90));
+            $choiceThree = rand(0, 9);
+            $choiceFour = rand(0, 9);
+            $sn = $choiceOne . $choiceTwo . date('ymdHis') . $choiceThree . $choiceFour;
+            if (!TaskOrder::where('sn', $sn)->first()) {
+                return $sn;
+            }
+        }
     }
 }
