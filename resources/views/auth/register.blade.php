@@ -38,6 +38,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="account_type" class="col-md-4 control-label">账号类型</label>
+                            <div class="col-md-6">
+                                <select id="account_type" class="form-control" name="account_type">
+                                    <option value="company">公司</option>
+                                    <option value="person">个人</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="name" class="col-md-4 control-label">公司名称</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" required>
