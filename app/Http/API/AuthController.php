@@ -15,27 +15,30 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    function create(Request $request) {
+    public function create(Request $request) {
         $this->validator($request->input())->validate();
-        $user = User::where('username', $request->input('identity'))->orWhere('email', $request->input('identity'))->first();
-        if ($user && password_verify($user->password, $request->input('password'))) {
+        $user = User::where('username', $request->input('account'))->orWhere('email', $request->input('account'))->first();
+        if ($user && password_verify($request->input('password'), $user->password)) {
+            if (!$user->isActivated()) {
+                return $this->errorJsonResponse(400, 'account is not activated.');
+            }
             $token = JWTAuth::fromUser($user);
             return $this->successJsonResponse([
                 'access_token' => $token,
-                'user' => user,
+                'user' => $user,
             ]);
         } else {
-            return $this->errorJsonResponse(400);
+            return $this->errorJsonResponse(400, 'account or password is not correct.');
         }
     }
 
-    function delete() {
+    public function delete() {
 
     }
 
     protected function validator($data) {
         return Validator::make($data, [
-            'identity' => 'required',
+            'account' => 'required',
             'password' => 'required'
         ]);
     }

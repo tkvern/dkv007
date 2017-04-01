@@ -28,9 +28,17 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
-    public function orders() {
+    /**
+     * @return bool
+     */
+    public function isActivated() {
+        return $this->activated_at != null;
+    }
+
+    public function taskOrders() {
         return $this->hasMany(TaskOrder::class);
     }
+
 
     public function tasks() {
         return $this->hasMany(Task::class);

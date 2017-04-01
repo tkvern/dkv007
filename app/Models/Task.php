@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $cast = [
+    protected $fillable = ['name', 'local_dir', 'handle_params', 'deliver_type'];
+
+    protected $casts = [
         'handle_params' => 'array',
     ];
     //

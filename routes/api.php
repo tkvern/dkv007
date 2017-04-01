@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/auth', 'AuthController@create');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/user', 'UserController@show');
+    Route::post('/user/task_orders', 'TaskOrdersController@create');
+    Route::get('/user/task_orders', 'TaskOrdersController@index');
 });

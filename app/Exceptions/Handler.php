@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -64,7 +65,6 @@ class Handler extends ExceptionHandler
 
     protected  function apiExceptionRender($request, Exception $e) {
         $e = $this->prepareException($e);
-
         if ($e instanceof HttpResponseException) {
             return response()->json([
                 'err_code' => $e->getCode().'',

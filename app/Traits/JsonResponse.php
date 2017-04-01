@@ -22,7 +22,7 @@ Trait JsonResponse
         return response()->json($ret, $statusCode);
     }
 
-    protected function errorJsonResponse($errCode, $errors, $statusCode)
+    protected function errorJsonResponse($errCode, $errors, $statusCode=200)
     {
         return response()->json([
             'err_code' => $errCode,
