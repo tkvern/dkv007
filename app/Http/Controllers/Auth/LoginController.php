@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -25,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +39,31 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * rewrite username
+     */
+    public function username() {
+        return 'account';
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required',
+            'password' => 'required',
+            'captcha' => 'required|captcha',
+        ]);
+    }
+
+    protected function attemptLogin(Request $request) {
+        $user = User::where('username', $request->input($this->username()))
+                    ->orWhere('email', $request->input($this->username()))
+                    ->first();
+        if ($user && password_verify($request->input('password'), $user->password)) {
+            $this->guard()->login($user, $request->has('remember'));
+        }
+        return $user;
     }
 }

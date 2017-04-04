@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\UserActivate;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -40,6 +42,24 @@ class RegisterController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        Mail::to($user->email)->send(new UserActivate($user));
+        return redirect(route('user.activate_email', ['email' => $user->email]))->with(['flash_message' => '确认邮件已发送到你的邮箱, 请前往激活。']);
+//        $this->guard()->login($user);
+//
+//        return $this->registered($request, $user)
+//              ?: redirect($this->redirectPath());
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -57,6 +77,7 @@ class RegisterController extends Controller
             'region' => 'required|max:100',
             'address' => 'required',
             'password' => 'required|min:6|confirmed',
+            'captcha' => 'required|captcha',
         ]);
     }
 
@@ -78,6 +99,7 @@ class RegisterController extends Controller
             'region' => $data['region'],
             'contact_address' => $data['address'],
             'password' => bcrypt($data['password']),
+            'captcha' => $data['captcha'],
         ]);
     }
 }

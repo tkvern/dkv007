@@ -25,6 +25,11 @@ class TaskOrdersController extends Controller
         return $this->paginateJsonResponse($orders);
     }
 
+    public function show($order_sn) {
+        $order = TaskOrder::find($order_sn);
+        return $this->successJsonResponse(['order' => $order]);
+    }
+
     public function create(Request $request) {
         $this->validator($request->input())->validate();
         DB::transaction(function () use($request) {
@@ -35,7 +40,6 @@ class TaskOrdersController extends Controller
             $order->save();
             $tasks = $request->input('tasks');
             foreach($tasks as $task) {
-                info(print_r($task, true));
                 $newTask = new Task([
                     'name' => $task['name'],
                     'local_dir' => $task['local_dir'],

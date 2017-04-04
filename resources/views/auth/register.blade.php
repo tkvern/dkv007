@@ -128,6 +128,26 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <label for="captcha" class="col-md-4 control-label">验证码</label>
+
+                            <div class="col-md-6">
+                                <input id="captcha" type="text" class="form-control" name="captcha" required autocomplete="off">
+
+                                @if ($errors->has('captcha'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <p>{!! captcha_img() !!}</p>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
