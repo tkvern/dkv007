@@ -18,4 +18,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', 'UserController@show');
     Route::post('/user/task_orders', 'TaskOrdersController@create');
     Route::get('/user/task_orders', 'TaskOrdersController@index');
+    Route::get('/user/task_orders/{order_sn}', 'TaskOrdersController@show');
 });

@@ -25,8 +25,10 @@ class TaskOrdersController extends Controller
         return $this->paginateJsonResponse($orders);
     }
 
-    public function show($order_sn) {
-        $order = TaskOrder::find($order_sn);
+    public function show(Request $request, $order_sn) {
+        $user = $request->user();
+        $order = $user->taskOrders()->where('sn', $order_sn)->first();
+        $order->load('tasks');
         return $this->successJsonResponse(['order' => $order]);
     }
 

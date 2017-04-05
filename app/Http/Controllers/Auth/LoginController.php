@@ -62,6 +62,7 @@ class LoginController extends Controller
                     ->orWhere('email', $request->input($this->username()))
                     ->first();
         if ($user && password_verify($request->input('password'), $user->password)) {
+            $user->update(['login_ip' => $request->getClientIp(), 'login_at' => time() ]);
             $this->guard()->login($user, $request->has('remember'));
         }
         return $user;

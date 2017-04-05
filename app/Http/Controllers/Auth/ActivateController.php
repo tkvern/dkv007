@@ -33,12 +33,12 @@ class ActivateController extends Controller
         try {
             $payload = $manager->decode(new Token($token))->get();
         } catch (Exception $e) {
-            return redirect(route('user.activate_email'))->with(['flash_message' => '用户激活失败，请重新获取激活邮件']);
+            return redirect(route('user.activate_email'))->with(['flash_message' => '无效的激活链接，请重新获取激活邮件']);
         }
         $email = $payload['sub'];
         $user = User::where('email', $email)->first();
         if ($user && !$user->isActivated()) {
-            $user->update('activated_at', time());
+            $user->update(['activated_at' => time()]);
             return redirect(route('login'))->with(['flash_message' => '用户激活成功']);
         }
         return redirect(route('login'))->withInput(['account' => $user->email]);
@@ -54,6 +54,8 @@ class ActivateController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         if(!$user) {
             return redirect()->back()->withErrors(['email' => '邮箱地址不存在']);
+        } else if ($user->isActivated()) {
+            return redirect()->back()->withErrors(['email' => '该邮箱已经被激活了']);
         }
         Mail::to($user->email)->send(new UserActivate($user));
         return redirect(route('user.activate_email'))->with(['flash_message' => '激活链接已发送到你的邮箱']);

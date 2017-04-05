@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskOrder extends Model
 {
-    //
+    public $incrementing = false;
+    protected $primaryKey = 'sn';
+
     public function tasks() {
         return $this->hasMany(Task::class, 'order_sn', 'sn');
     }
