@@ -63,4 +63,17 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * return a token for activating user
+     */
+    public function getActivateToken() {
+        $factory = app('tymon.jwt.payload.factory')->sub($this->email)->setTTL(config('jwt.activate_ttl'));
+        $payload = $factory->make();
+        // $exp = $payload->getClaims()['exp'];
+        // $exp->setValue(time() + 7200);
+        $manager = app('tymon.jwt.manager');
+        $token = $manager->encode($payload)->get();
+        return $token;
+    }
 }

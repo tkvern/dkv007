@@ -32,6 +32,6 @@ class UserActivate extends Mailable
     public function build()
     {
         return $this->markdown('mail.user.activate')
-                        ->with(['token' => 'token']);
+                        ->with(['token' => $this->user->getActivateToken()]);
     }
 }

@@ -14,19 +14,40 @@ use App\Http\Controllers\Controller;
 use App\Mail\UserActivate;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use League\Flysystem\Exception;
+use Tymon\JWTAuth\Token;
 
 class ActivateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function show() {
         return view('auth.activate');
     }
 
     public function activate($token) {
-        echo $token;
+        $manager = app('tymon.jwt.manager');
+        try {
+            $payload = $manager->decode(new Token($token))->get();
+        } catch (Exception $e) {
+            return redirect(route('user.activate_email'))->with(['flash_message' => '用户激活失败，请重新获取激活邮件']);
+        }
+        $email = $payload['sub'];
+        $user = User::where('email', $email)->first();
+        if ($user && !$user->isActivated()) {
+            $user->update('activated_at', time());
+            return redirect(route('login'))->with(['flash_message' => '用户激活成功']);
+        }
+        return redirect(route('login'))->withInput(['account' => $user->email]);
     }
 
     /**
      * send use activate email
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function sendActivateEmail(Request $request) {
         $this->validator($request->input())->validate();

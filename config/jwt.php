@@ -102,6 +102,8 @@ return [
 
     'ttl' => env('JWT_TTL', 60*24*7),
 
+    'activate_ttl' => env('JWT_ACTIVATE_TTL', 2*60),
+
     /*
     |--------------------------------------------------------------------------
     | Refresh time to live

@@ -29,11 +29,15 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function jwt() {
-        $payload = JWTFactory::sub('user activate')->exp(time() + 3600)->make();
-        $manager = app('tymon.jwt.manager');
-        $token = $manager->encode($payload)->get();
-        return response()->json(['token' => $token]);
+    public function jwt(Request $request) {
+//        $factory = JWTFactory::sub('user activate');
+//        $factory->setTTL(120);
+//        $payload = $factory->make();
+        // $exp = $payload->getClaims()['exp'];
+        // $exp->setValue(time() + 7200);
+//        $manager = app('tymon.jwt.manager');
+//        $token = $manager->encode($payload)->get();
+        return response()->json(['token' => $request->user()->getActivateToken()]);
     }
 
     public function decode_jwt($token) {

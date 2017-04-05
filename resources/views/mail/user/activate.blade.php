@@ -2,7 +2,7 @@
 # 用户激活
 点击激活按钮激活用户
 
-@component('mail::button', ['url' => route('user.activate', ['token' => 'token'])])
+@component('mail::button', ['url' => route('user.activate', ['token' => $token])])
 激活用户
 @endcomponent
 
