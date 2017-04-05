@@ -27,7 +27,7 @@ class TaskOrdersController extends Controller
 
     public function show(Request $request, $order_sn) {
         $user = $request->user();
-        $order = $user->taskOrders()->where('sn', $order_sn)->first();
+        $order = $user->taskOrders()->where('out_trade_no', $order_sn)->first();
         $order->load('tasks');
         return $this->successJsonResponse(['order' => $order]);
     }
@@ -36,9 +36,10 @@ class TaskOrdersController extends Controller
         $this->validator($request->input())->validate();
         DB::transaction(function () use($request) {
             $user = $request->user();
-            $order = TaskOrder::make($user, $request->input('deliver_type'), 0.0, 0.0);
+            $order = TaskOrder::make($user, $request->input('deliver_type'), 0, 0);
+            $order->trade_name = 'trade_'.date('ymdHis');
             $order->pay_type = '';
-            $order->pay_state = 'pay_success';
+            $order->pay_state = 'pay_free';
             $order->save();
             $tasks = $request->input('tasks');
             foreach($tasks as $task) {
@@ -48,13 +49,13 @@ class TaskOrdersController extends Controller
                     'handle_params' => $task['handle_params'],
                     'deliver_type' => $request->input('deliver_type'),
                 ]);
-                $newTask->price = 0.0;
-                $newTask->real_price = 0.0;
+                $newTask->price = 0;
+                $newTask->real_price = 0;
                 $newTask->user_id = $user->id;
                 $newTask->user_name = $user->name;
                 $newTask->pay_state = $order->pay_state;
                 $newTask->handle_state = 'created';
-                $newTask->order_sn = $order->sn;
+                $newTask->order_no = $order->out_trade_no;
                 $newTask->save();
                 $this->order = $order;
             }

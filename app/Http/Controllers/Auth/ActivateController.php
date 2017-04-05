@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
@@ -36,9 +37,10 @@ class ActivateController extends Controller
             return redirect(route('user.activate_email'))->with(['flash_message' => '无效的激活链接，请重新获取激活邮件']);
         }
         $email = $payload['sub'];
-        $user = User::where('email', $email)->first();
-        if ($user && !$user->isActivated()) {
-            $user->update(['activated_at' => time()]);
+        $user = User::where('email', $email)->firstOrFail();
+        if (!$user->isActivated()) {
+            $user->activated_at = Carbon::now();
+            $user->save();
             return redirect(route('login'))->with(['flash_message' => '用户激活成功']);
         }
         return redirect(route('login'))->withInput(['account' => $user->email]);

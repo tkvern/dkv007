@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -48,6 +49,41 @@ class LoginController extends Controller
         return 'account';
     }
 
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+        $user = User::where('username', $request->input($this->username()))
+            ->orWhere('email', $request->input($this->username()))
+            ->first();
+        if (!$user) {
+            return redirect()->back();
+        } else if (!$user->isActivated()) {
+            return redirect(route('user.activate_email'))->with(['flash_message' => '用户还未激活， 请先进行激活']);
+        } else if (password_verify($request->input('password'), $user->password)) {
+            $user->login_ip = $request->getClientIp();
+            $user->login_at = Carbon::now();
+            $user->save();
+            $this->guard()->login($user, $request->has('remember'));
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
@@ -55,16 +91,5 @@ class LoginController extends Controller
             'password' => 'required',
             'captcha' => 'required|captcha',
         ]);
-    }
-
-    protected function attemptLogin(Request $request) {
-        $user = User::where('username', $request->input($this->username()))
-                    ->orWhere('email', $request->input($this->username()))
-                    ->first();
-        if ($user && password_verify($request->input('password'), $user->password)) {
-            $user->update(['login_ip' => $request->getClientIp(), 'login_at' => time() ]);
-            $this->guard()->login($user, $request->has('remember'));
-        }
-        return $user;
     }
 }
