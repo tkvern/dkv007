@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+
+<!--[if IE 8]> <html lang="{{ config('app.locale') }}" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="{{ config('app.locale') }}" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="{{ config('app.locale') }}" class="no-js">
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +13,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', '量子云') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -81,8 +86,10 @@
         @yield('content')
     </div>
 
+    @yield('body')
+
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     @yield('script')
 </body>
 </html>

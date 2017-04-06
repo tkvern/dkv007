@@ -1,0 +1,40 @@
+.clear-padding {
+  padding: 0px;
+}
+
+.clear-margin {
+  margin: 0px;
+}
+
+.display-table {
+  display: table;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.forget-password {
+  position: absolute;
+  right: 0px;
+  top: -55px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.row.register {
+  form {
+    .form-group {
+      label.control-label {
+        line-height: 32px;
+        font-weight: 400;
+      }
+      span.text-danger {
+        letter-spacing: 0.2em;
+        color: #f04134;
+      }
+    }
+  }
+}
