@@ -1,40 +1,50 @@
 .clear-padding {
-  padding: 0px;
+    padding: 0px;
 }
 
 .clear-margin {
-  margin: 0px;
+    margin: 0px;
 }
 
 .display-table {
-  display: table;
+    display: table;
 }
 
 .display-flex {
-  display: flex;
+    display: flex;
 }
 
 .forget-password {
-  position: absolute;
-  right: 0px;
-  top: -55px;
+    position: absolute;
+    right: 0px;
+    top: -55px;
 }
 
 .position-relative {
-  position: relative;
+    position: relative;
 }
 
 .row.register {
-  form {
-    .form-group {
-      label.control-label {
-        line-height: 32px;
-        font-weight: 400;
-      }
-      span.text-danger {
-        letter-spacing: 0.2em;
-        color: #f04134;
-      }
+    form {
+        .form-group {
+            label.control-label {
+                line-height: 32px;
+                font-weight: 400;
+            }
+            span.text-danger {
+                letter-spacing: 0.2em;
+                color: #f04134;
+            }
+        }
     }
-  }
+}
+
+.table>thead>tr>th {
+    min-width: 80px;
+}
+
+@media (max-width: 767px) {
+    .navbar-top-links .dropdown-user {
+        left: 0px!important;
+    }
 }

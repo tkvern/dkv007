@@ -21,19 +21,19 @@ Route::get('/user/activate_email', 'Auth\ActivateController@show')->name('user.a
 Route::post('/user/activate_email', 'Auth\ActivateController@sendActivateEmail');
 Route::get('/user/activate/{token}', 'Auth\ActivateController@activate')->name('user.activate');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/jwt', 'HomeController@jwt');
 Route::get('/decode_jwt/{token}', 'HomeController@decode_jwt');
 
 // sb-admin
-Route::get('/', function()
-{
-	return View::make('home');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('home');
+// });
 
-Route::get('/charts', function()
+Route::get('/task_order', function()
 {
-	return View::make('mcharts');
+	return View::make('task_order');
 });
 
 Route::get('/tables', function()
