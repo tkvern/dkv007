@@ -13,43 +13,47 @@
                     </div>
                 @endif
                 
-                <form role="form" method="POST" action="{{ route('login') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
                     <fieldset>
                         <div class="form-group{{ $errors->has('account') ? ' has-error' : '' }}">
-                            <input
-                                id="account"
-                                type="text"
-                                class="form-control"
-                                name="account"
-                                value="{{ old('account') }}"
-                                placeholder="用户名或邮箱"
-                                required autofocus>
+                            <div class="col-md-12">
+                                <input
+                                    id="account"
+                                    type="text"
+                                    class="form-control"
+                                    name="account"
+                                    value="{{ old('account') }}"
+                                    placeholder="用户名或邮箱"
+                                    required autofocus>
 
-                            @if ($errors->has('account'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('account') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('account'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('account') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <input
-                                id="password" 
-                                type="password"
-                                class="form-control"
-                                name="password"
-                                placeholder="密码"
-                                required>
+                            <div class="col-md-12">
+                                <input
+                                    id="password" 
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
+                                    placeholder="密码"
+                                    required>
 
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }} display-flex">
-                            <div class="col-md-6 clear-padding">
+                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <div class="col-md-6 col-xs-6">
                                 <input
                                     id="captcha"
                                     type="text"
@@ -63,12 +67,10 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-6 control-label">
-                                <img src="{{ captcha_src() }}" alt="captcha" id="captcha_img" />
-                            </div>
+                            <img class="control-label col-md-5 col-xs-5" src="{{ captcha_src() }}" alt="captcha" id="captcha_img" />
                         </div>
-                        <div class="form-group display-flex">
-                            <div class="pull-left">
+                        <div class="form-group">
+                            <div class="col-md-6">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我
@@ -78,14 +80,16 @@
                         </div>
                         <!-- Change this to a button or input when using this as a form -->
 
-                        <div class="form-group position-relative">
+                        <div class="form-group">
+                            <div class="col-md-12">
 
-                            <a class="btn btn-link forget-password" href="{{ route('password.request') }}">
-                                忘记密码?
-                            </a>
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                                登录
-                            </button>
+                                <a class="btn btn-link forget-password" href="{{ route('password.request') }}">
+                                    忘记密码?
+                                </a>
+                                <button type="submit" class="btn btn-md btn-primary btn-block">
+                                    登录
+                                </button>
+                            </div>
                         </div>
                     </fieldset>
                 </form>

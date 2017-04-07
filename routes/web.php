@@ -22,6 +22,7 @@ Route::post('/user/activate_email', 'Auth\ActivateController@sendActivateEmail')
 Route::get('/user/activate/{token}', 'Auth\ActivateController@activate')->name('user.activate');
 
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 Route::get('/jwt', 'HomeController@jwt');
 Route::get('/decode_jwt/{token}', 'HomeController@decode_jwt');
 
@@ -31,63 +32,18 @@ Route::get('/decode_jwt/{token}', 'HomeController@decode_jwt');
 // 	return View::make('home');
 // });
 
-Route::get('/task_order', function()
+Route::get('/tasks/order', function()
 {
-	return View::make('task_order');
+	return View::make('tasks.order');
 });
 
-Route::get('/tables', function()
+Route::get('/user/info', function()
 {
-	return View::make('table');
+	return View::make('user.info');
 });
 
-Route::get('/forms', function()
+Route::get('/user/password', function()
 {
-	return View::make('form');
+	return View::make('user.password');
 });
 
-Route::get('/grid', function()
-{
-	return View::make('grid');
-});
-
-Route::get('/buttons', function()
-{
-	return View::make('buttons');
-});
-
-
-Route::get('/icons', function()
-{
-	return View::make('icons');
-});
-
-Route::get('/panels', function()
-{
-	return View::make('panel');
-});
-
-Route::get('/typography', function()
-{
-	return View::make('typography');
-});
-
-Route::get('/notifications', function()
-{
-	return View::make('notifications');
-});
-
-Route::get('/blank', function()
-{
-	return View::make('blank');
-});
-
-// Route::get('/login', function()
-// {
-// 	return View::make('login');
-// });
-
-Route::get('/documentation', function()
-{
-	return View::make('documentation');
-});

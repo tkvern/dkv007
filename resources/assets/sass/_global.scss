@@ -17,7 +17,7 @@
 .forget-password {
     position: absolute;
     right: 0px;
-    top: -55px;
+    top: -45px;
 }
 
 .position-relative {
@@ -37,6 +37,10 @@
             }
         }
     }
+}
+
+#captcha_img {
+    padding-top: 5px;
 }
 
 .table>thead>tr>th {

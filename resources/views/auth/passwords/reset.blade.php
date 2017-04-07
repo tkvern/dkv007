@@ -13,64 +13,72 @@
                     </div>
                 @endif
 
-                <form role="form" method="POST" action="{{ route('password.request') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
                     {{ csrf_field() }}
                     <fieldset>
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <input
-                                id="email"
-                                type="email"
-                                class="form-control"
-                                name="email"
-                                value="{{ $email or old('email') }}"
-                                placeholder="邮箱地址"
-                                required autofocus>
+                            <div class="col-md-12">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    class="form-control"
+                                    name="email"
+                                    value="{{ $email or old('email') }}"
+                                    placeholder="邮箱地址"
+                                    required autofocus>
 
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <input
-                                id="password"
-                                type="password"
-                                class="form-control"
-                                name="password"
-                                placeholder="新密码"
-                                required>
+                            <div class="col-md-12">
+                                <input
+                                    id="password"
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
+                                    placeholder="新密码"
+                                    required>
 
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <input
-                                id="password-confirm"
-                                type="password"
-                                class="form-control"
-                                name="password_confirmation"
-                                placeholder="确认新密码"
-                                required>
+                            <div class="col-md-12">
+                                <input
+                                    id="password-confirm"
+                                    type="password"
+                                    class="form-control"
+                                    name="password_confirmation"
+                                    placeholder="确认新密码"
+                                    required>
 
-                            @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                </span>
-                            @endif
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">
-                                重置密码
-                            </button>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-md btn-primary btn-block">
+                                    重置密码
+                                </button>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
