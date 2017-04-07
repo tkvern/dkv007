@@ -1,0 +1,54 @@
+.clear-padding {
+    padding: 0px;
+}
+
+.clear-margin {
+    margin: 0px;
+}
+
+.display-table {
+    display: table;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.forget-password {
+    position: absolute;
+    right: 0px;
+    top: -45px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.row.register {
+    form {
+        .form-group {
+            label.control-label {
+                line-height: 32px;
+                font-weight: 400;
+            }
+            span.text-danger {
+                letter-spacing: 0.2em;
+                color: #f04134;
+            }
+        }
+    }
+}
+
+#captcha_img {
+    padding-top: 5px;
+}
+
+.table>thead>tr>th {
+    min-width: 80px;
+}
+
+@media (max-width: 767px) {
+    .navbar-top-links .dropdown-user {
+        left: 0px!important;
+    }
+}

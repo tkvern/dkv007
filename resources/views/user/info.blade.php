@@ -1,17 +1,15 @@
-@extends('layouts.plane')
-
-@section('body')
-<div class="container">
-    <div class="row register">
-        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <br /><br /><br />
-            @section ('register_panel_title','量子云 用户注册')
-            @section ('register_panel_body')
-                <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+@extends('layouts.dashboard')
+@section('page_heading','个人资料')
+@section('section')
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 col-sm-10 col-xs-12">
+            <br /><br />
+                <form class="form-horizontal" role="form" method="POST">
                     {{ csrf_field() }}
                     <fieldset>
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="username" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>用户名</label>
+                            <label for="username" class="col-md-4 col-sm-4 control-label text-right">用户名</label>
 
                             <div class="col-md-8 col-sm-8">
                                 <input 
@@ -20,7 +18,7 @@
                                     class="form-control" 
                                     name="username" 
                                     value="{{ old('username') }}"
-                                    placeholder="请输入英文，区分大小写"
+                                    disabled
                                     required autofocus>
 
                                 @if ($errors->has('username'))
@@ -32,17 +30,15 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>邮箱</label>
+                            <label for="email" class="col-md-4 col-sm-4 control-label text-right">邮箱</label>
 
                             <div class="col-md-8 col-sm-8">
                                 <input 
                                     id="email" 
                                     type="email" 
-                                    class="form-control" 
-                                    name="email" 
+                                    class="form-control"
                                     value="{{ old('email') }}"
-                                    placeholder="请输入正确的邮箱地址"
-                                    required>
+                                    disabled>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -53,9 +49,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="account_type" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>账号类型</label>
+                            <label for="account_type" class="col-md-4 col-sm-4 control-label text-right">账号类型</label>
                             <div class="col-md-8 col-sm-8">
-                                <select id="account_type" class="form-control" name="account_type">
+                                <select id="account_type" class="form-control" name="account_type" disabled>
                                     <option value="company">企业</option>
                                     <option value="person">个人</option>
                                 </select>
@@ -63,16 +59,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>名称</label>
+                            <label for="name" class="col-md-4 col-sm-4 control-label text-right">名称</label>
                             <div class="col-md-8 col-sm-8">
                                 <input
                                     id="name"
                                     type="text"
                                     class="form-control"
-                                    name="name"
                                     value="{{ old('name') }}"
-                                    placeholder="个人或企业真实名称"
-                                    required>
+                                    disabled>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -156,88 +150,16 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>密码</label>
-
-                            <div class="col-md-8 col-sm-8">
-                                <input
-                                    id="password"
-                                    type="password"
-                                    class="form-control"
-                                    name="password"
-                                    placeholder="请设置登录密码"
-                                    required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>确认密码</label>
-                            <div class="col-md-8 col-sm-8">
-                                <input
-                                    id="password-confirm"
-                                    type="password"
-                                    class="form-control"
-                                    name="password_confirmation"
-                                    placeholder="请确认登录密码"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('captcha') ? ' has-error' : '' }}">
-                            <label for="captcha" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>验证码</label>
-
-                            <div class="col-md-8 col-sm-8">
-                                <input
-                                    id="captcha"
-                                    type="text"
-                                    class="form-control"
-                                    name="captcha"
-                                    placeholder="请输入验证码"
-                                    required
-                                    autocomplete="off">
-
-                                @if ($errors->has('captcha'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('captcha') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-sm-8 col-md-offset-4 col-sm-offset-4">
-                                <img src="{{ captcha_src() }}" alt="captcha" id="captcha_img" />
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-md-8 col-sm-8 col-md-offset-4 col-sm-offset-4">
                                 <button type="submit" class="btn btn-md btn-primary btn-block">
-                                    注册
+                                    提交
                                 </button>
                             </div>
                         </div>
                     </fieldset>
                 </form>
-            
-            @endsection
-            @include('widgets.panel', array('as'=>'register', 'header'=>true))
+            </div>
         </div>
     </div>
-</div>
-@endsection
-
-@section('script')
-    <script>
-        $('#captcha_img').on('click', function() {
-            this.src = '{{ captcha_src() }}' + Math.random();
-        });
-    </script>
-@endsection
+@stop
