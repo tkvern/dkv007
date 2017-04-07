@@ -54,7 +54,7 @@ class TaskOrdersController extends Controller
                 $newTask->user_id = $user->id;
                 $newTask->user_name = $user->name;
                 $newTask->pay_state = $order->pay_state;
-                $newTask->handle_state = 'created';
+                $newTask->handle_state = 'resource_waiting';
                 $newTask->order_no = $order->out_trade_no;
                 $newTask->save();
                 $this->order = $order;

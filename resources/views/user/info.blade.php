@@ -17,7 +17,7 @@
                                     type="text" 
                                     class="form-control" 
                                     name="username" 
-                                    value="{{ old('username') }}"
+                                    value="{{ old('username', $user->username) }}"
                                     disabled
                                     required autofocus>
 
@@ -37,7 +37,7 @@
                                     id="email" 
                                     type="email" 
                                     class="form-control"
-                                    value="{{ old('email') }}"
+                                    value="{{ old('email', $user->email) }}"
                                     disabled>
 
                                 @if ($errors->has('email'))
@@ -53,7 +53,7 @@
                             <div class="col-md-8 col-sm-8">
                                 <select id="account_type" class="form-control" name="account_type" disabled>
                                     <option value="company">企业</option>
-                                    <option value="person">个人</option>
+                                    <option value="person" {{ $user->account_type == 'person' ? 'selected' : '' }}>个人</option>
                                 </select>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     id="name"
                                     type="text"
                                     class="form-control"
-                                    value="{{ old('name') }}"
+                                    value="{{ old('name', $user->name) }}"
                                     disabled>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -83,7 +83,7 @@
                                     type="text"
                                     class="form-control"
                                     name="phone_number"
-                                    value="{{ old('phone_number') }}"
+                                    value="{{ old('phone_number', $user->phone_number) }}"
                                     placeholder="请输入大陆电话号，其他用户不可见"
                                     required>
                                 @if ($errors->has('phone_number'))
@@ -102,7 +102,7 @@
                                     type="text"
                                     class="form-control"
                                     name="country"
-                                    value="{{ old('country') }}"
+                                    value="{{ old('country', $user->country) }}"
                                     placeholder="例:中国"
                                     required>
                                 @if ($errors->has('country'))
@@ -121,7 +121,7 @@
                                     type="text"
                                     class="form-control"
                                     name="region"
-                                    value="{{ old('region') }}"
+                                    value="{{ old('region', $user->region) }}"
                                     placeholder="填写省、市、区等"
                                     required>
                                 @if ($errors->has('region'))
@@ -140,12 +140,12 @@
                                     type="text"
                                     class="form-control"
                                     name="address"
-                                    value="{{ old('address') }}"
+                                    value="{{ old('contact_address', $user->contact_address) }}"
                                     placeholder="填写街道、门牌号、楼层房间号等信息"
                                     required>
-                                @if ($errors->has('address'))
+                                @if ($errors->has('contact_address'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
+                                        <strong>{{ $errors->first('contact_address') }}</strong>
                                     </span>
                                 @endif
                             </div>

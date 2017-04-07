@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">量子云</a>
+                <a class="navbar-brand" href="{{ url ('/') }}">量子云</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -19,7 +19,7 @@
                         <i class="fa fa-user fa-fw"></i>{{ Auth::user()->username }}  <i class="fa fa-caret-down fa-fw"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{{ url ('user/info') }}"><i class="fa fa-user fa-fw"></i>个人信息</a>
+                        <li><a href="{{ url ('user/profile') }}"><i class="fa fa-user fa-fw"></i>个人信息</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -42,13 +42,13 @@
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> 控制台</a>
                         </li>
                         <li {{ (Request::is('*tasks/order') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('tasks/order') }}"><i class="fa fa-file-movie-o fa-fw"></i> VR订单</a>
+                            <a href="{{ url ('tasks/order') }}"><i class="fa fa-file-movie-o fa-fw"></i> 订单</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-cog fa-fw"></i> 账户设置<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ url ('user/info') }}">个人资料</a>
+                                    <a href="{{ url ('user/profile') }}">个人资料</a>
                                 </li>
                                 <li>
                                     <a href="{{ url ('user/password') }}">密码管理</a>

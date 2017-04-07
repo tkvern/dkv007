@@ -65,7 +65,7 @@ class LoginController extends Controller
             ->orWhere('email', $request->input($this->username()))
             ->first();
         if (!$user) {
-            return redirect()->back();
+            return redirect()->back()->withErrors(['account' => '账号不存在']);
         } else if (!$user->isActivated()) {
             return redirect(route('user.activate_email'))->with(['flash_message' => '用户还未激活， 请先进行激活']);
         } else if (password_verify($request->input('password'), $user->password)) {

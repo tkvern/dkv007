@@ -37,13 +37,9 @@ Route::get('/tasks/order', function()
 	return View::make('tasks.order');
 });
 
-Route::get('/user/info', function()
-{
-	return View::make('user.info');
-});
+Route::get('/user/profile', 'UserController@profile');
+Route::post('/user/profile', 'UserController@update_profile');
 
-Route::get('/user/password', function()
-{
-	return View::make('user.password');
-});
+Route::get('/user/password', 'UserController@password');
+Route::post('/user/password', 'UserController@change_password');
 
