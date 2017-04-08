@@ -59,7 +59,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="col-md-4 col-sm-4 control-label text-right">名称</label>
+                            @if($user->account_bypte == 'person')
+                                <label for="name" class="col-md-4 col-sm-4 control-label text-right">姓名</label>
+                            @else
+                                <label for="name" class="col-md-4 col-sm-4 control-label text-right">公司名称</label>
+                            @endif
                             <div class="col-md-8 col-sm-8">
                                 <input
                                     id="name"
@@ -133,13 +137,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="address" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>地址</label>
+                            <label for="contact address" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>地址</label>
                             <div class="col-md-8 col-sm-8">
                                 <input
-                                    id="address"
+                                    id="contact_address"
                                     type="text"
                                     class="form-control"
-                                    name="address"
+                                    name="contact_address"
                                     value="{{ old('contact_address', $user->contact_address) }}"
                                     placeholder="填写街道、门牌号、楼层房间号等信息"
                                     required>

@@ -8,6 +8,7 @@
 
 namespace App\Http\API;
 
+use App\Models\OrderExpress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +42,19 @@ class TaskOrdersController extends Controller
             $order->pay_type = '';
             $order->pay_state = 'pay_free';
             $order->save();
+            if ($request->input('deliver_type') == 'express') {
+                $expressInfo = $request->input('express_info');
+                $express = new OrderExpress([
+                    'deliver_address' => $expressInfo['deliver_address'],
+                    'contact_address' => $expressInfo['contact_address'],
+                    'contact_phone_number' => $expressInfo['contact_phone_number'],
+                ]);
+                $order->express()->save($express);
+//                $express->order_no = $order->out_trade_no;
+//                $express->save();
+            }
             $tasks = $request->input('tasks');
+            $newTasks = [];
             foreach($tasks as $task) {
                 $newTask = new Task([
                     'name' => $task['name'],
@@ -55,17 +68,18 @@ class TaskOrdersController extends Controller
                 $newTask->user_name = $user->name;
                 $newTask->pay_state = $order->pay_state;
                 $newTask->handle_state = 'resource_waiting';
-                $newTask->order_no = $order->out_trade_no;
-                $newTask->save();
-                $this->order = $order;
+                array_push($newTasks, $newTask);
+                //$newTask->save();
             }
+            $order->tasks()->saveMany($newTasks);
+            $this->order = $order;
         });
-        $ret = ['order' => $this->order];
+        $ret = ['order' => $this->order->load('tasks', 'express')];
         return $this->successJsonResponse($ret);
     }
 
     private function validator($data) {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'deliver_type' => [
                 'required',
                 Rule::in(['network', 'express'])
@@ -74,5 +88,13 @@ class TaskOrdersController extends Controller
             'tasks.*.local_dir' => 'required',
             'tasks.*.handle_params' => 'required|array',
         ]);
+        $validator->sometimes(
+            ['express_info.deliver_address', 'express_info.contact_address', 'express_info.contact_phone_number'],
+            'required',
+            function($input) {
+                return $input->deliver_type == 'express';
+            }
+        );
+        return $validator;
     }
 }

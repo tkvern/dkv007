@@ -9,12 +9,22 @@ class TaskOrder extends Model
     public $incrementing = false;
     protected $primaryKey = 'out_trade_no';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function tasks() {
         return $this->hasMany(Task::class, 'order_no', 'out_trade_no');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function express() {
+        return $this->hasOne(OrderExpress::class, 'order_no', 'out_trade_no');
     }
 
     /**
@@ -34,6 +44,13 @@ class TaskOrder extends Model
         }
     }
 
+    /**
+     * @param $user
+     * @param $deliver_type
+     * @param $price
+     * @param $real_price
+     * @return TaskOrder
+     */
     public static function make($user, $deliver_type, $price, $real_price) {
         $order = new TaskOrder();
         $order->out_trade_no = static::genOrderNO();

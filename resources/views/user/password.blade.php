@@ -50,10 +50,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>确认密码</label>
+                            <label for="password_confirmation" class="col-md-4 col-sm-4 control-label text-right"><span class="text-danger">*</span>确认密码</label>
                             <div class="col-md-8 col-sm-8">
                                 <input
-                                    id="password-confirm"
+                                    id="password_confirmation"
                                     type="password"
                                     class="form-control"
                                     name="password_confirmation"
