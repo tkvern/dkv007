@@ -42,7 +42,7 @@
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> 控制台</a>
                         </li>
                         <li {{ (Request::is('*tasks/order') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('tasks/order') }}"><i class="fa fa-file-movie-o fa-fw"></i> 订单</a>
+                            <a href="{{ url ('tasks/order') }}"><i class="fa fa-shopping-cart fa-fw"></i> 订单</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-cog fa-fw"></i> 账户设置<span class="fa arrow"></span></a>

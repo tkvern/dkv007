@@ -28,6 +28,12 @@
     </script>
 </head>
 <body>
+    @if (has_flash_message())
+        <div class="flash_message">
+        <?php $flash_message = get_flash_message(); ?>
+            @include('widgets.alert', array('class'=>$flash_message['level'], 'dismissable'=>true, 'message'=> $flash_message['message'], 'icon'=> 'check'))
+        </div>
+    @endif
     @yield('body')
     <script src="{{ mix('js/app.js') }}"></script>
     @yield('script')
