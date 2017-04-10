@@ -18,7 +18,8 @@ class UserController extends Controller
         $this->profileValidator($request->input())->validate();
         $user = $request->user();
         $user->update($request->only(['phone_number', 'country' , 'region', 'contact_address']));
-        return redirect()->back()->with(['flash_success_message' => '用户信息更新成功']);
+        flash('用户信息更新成功', 'success');
+        return redirect()->back();
     }
 
     public function password() {
@@ -30,7 +31,8 @@ class UserController extends Controller
         $user = $request->user();
         $user->password = bcrypt($request->input('password'));
         $user->save();
-        return redirect()->back()->with(['flash_success_message' => '密码更新成功']);
+        flash('密码更新成功');
+        return redirect()->back();
     }
 
     private function profileValidator($data) {

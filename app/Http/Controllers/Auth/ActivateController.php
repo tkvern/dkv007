@@ -34,14 +34,16 @@ class ActivateController extends Controller
         try {
             $payload = $manager->decode(new Token($token))->get();
         } catch (Exception $e) {
-            return redirect(route('user.activate_email'))->with(['flash_message' => '无效的激活链接，请重新获取激活邮件']);
+            flash('无效的激活链接，请重新获取激活邮件', 'error');
+            return redirect(route('user.activate_email'));
         }
         $email = $payload['sub'];
         $user = User::where('email', $email)->firstOrFail();
         if (!$user->isActivated()) {
             $user->activated_at = Carbon::now();
             $user->save();
-            return redirect(route('login'))->with(['flash_message' => '用户激活成功']);
+            flash('用户激活成功', 'success');
+            return redirect(route('login'));
         }
         return redirect(route('login'))->withInput(['account' => $user->email]);
     }
@@ -60,7 +62,8 @@ class ActivateController extends Controller
             return redirect()->back()->withErrors(['email' => '该邮箱已经被激活了']);
         }
         Mail::to($user->email)->send(new UserActivate($user));
-        return redirect(route('user.activate_email'))->with(['flash_message' => '激活链接已发送到你的邮箱']);
+        flash('激活链接已发送到你的邮箱', 'success');
+        return redirect(route('user.activate_email'));
     }
 
     private function validator($data) {
