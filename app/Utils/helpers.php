@@ -26,3 +26,14 @@ if(!function_exists('has_flash_message')) {
         return \Illuminate\Support\Facades\Session::has('flash_message');
     }
 }
+
+if(!function_exists('get_statistic_by_state')) {
+    function get_statistic_by_state($source, $stateField, $countField) {
+        $statistic = ['total' => 0];
+        foreach($source as $obj) {
+            $statistic[$obj->{$stateField}] = $obj->{$countField};
+            $statistic['total'] += $obj->{$countField};
+        }
+        return $statistic;
+    }
+}
