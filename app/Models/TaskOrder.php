@@ -71,7 +71,11 @@ class TaskOrder extends Model
     }
 
     public static function payStateLabel($payState) {
-        return isset(self::$payStateMap[$payState]) ? self::$payState[$payState] : '未知';
+        return isset(self::$payStateMap[$payState]) ? self::$payStateMap[$payState] : '未知';
+    }
+
+    public function iPayStateLabel() {
+        return self::payStateLabel($this->pay_state);
     }
 
     public static function deliverLabel($deliverType) {

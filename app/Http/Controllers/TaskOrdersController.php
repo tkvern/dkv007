@@ -6,22 +6,17 @@ use Illuminate\Http\Request;
 
 class TaskOrdersController extends Controller
 {
-    private  $user;
-
-    public function __construct(Request $request)
-    {
-        $this->user = $request->user();
-    }
-
     //
-    public function index() {
-        $orders = $this->user->task_orders()->paginate(20);
-        return view('tasks.order', ['orders' => $orders]);
+    public function index(Request $request) {
+        $user = $request->user();
+        $orders = $user->taskOrders()->paginate(20);
+        return view('orders.index', ['orders' => $orders]);
     }
 
-    public function show($order_id) {
-        $order = $this->user->task_orders()->findOrFail($order_id);
+    public function show(Request $request, $order_id) {
+        $user = $request->user();
+        $order = $user->taskOrders()->findOrFail($order_id);
         $order->load('tasks');
-        return view();
+        return view('orders.show', ['order' => $order]);
     }
 }
