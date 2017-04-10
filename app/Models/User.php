@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Notifications\ResetPassword;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -75,5 +76,10 @@ class User extends Authenticatable implements JWTSubject
         $manager = app('tymon.jwt.manager');
         $token = $manager->encode($payload)->get();
         return $token;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

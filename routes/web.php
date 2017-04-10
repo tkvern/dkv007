@@ -33,7 +33,7 @@ Route::get('/user/activate/{token}', 'Auth\ActivateController@activate')->name('
 // 	return View::make('home');
 // });
 
-Route::get('/tasks/orders', function()
+Route::get('/task_orders', function()
 {
 	return View::make('tasks.order');
 });
