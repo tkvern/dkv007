@@ -25,9 +25,11 @@ class TasksController extends Controller
             return $this->errorJsonResponse(400, '不是网络上传');
         } else if ($task->pay_state != 'pay_free' && $task->pay_state != 'pay_success') {
             return $this->errorJsonResponse(400, '未支付');
-        } else {
+        } else if ($task->handle_state  != 'resource_waiting') {
+            return $this->errorJsonResponse(400, '未处于等待资源上传状态');
+        } else{
             $task->storage_address = $request->input('storage_address');
-            $task->handle_state = 'resource_uploaded';
+            $task->handle_state = 'resource_received';
             $task->save();
             return $this->successJsonResponse();
         }

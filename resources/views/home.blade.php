@@ -12,8 +12,8 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
-                                <div>已完成VR订单</div>
+                                <div class="huge">{{ $orderStat['total'] }}</div>
+                                <div>订单数</div>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTFactory;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Token;
@@ -22,11 +23,32 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $user = $request->user();
+        $orderStat = get_statistic_by_state(
+            DB::table('task_orders')
+                ->groupBy('state')
+                ->select(DB::raw('count(out_trade_no) as count, state'))
+                ->where('user_id', $user->id)
+                ->get(),
+            'state',
+            'count'
+        );
+        $taskStat = get_statistic_by_state(
+            DB::table('tasks')
+                ->groupBy('handle_state')
+                ->select('handle_state', DB::raw('count(id) as count'))
+                ->where('user_id', $user->id)
+                ->get(),
+            'handle_state',
+            'count'
+        );
+
+        return view('home', compact('user', 'orderStat', 'taskStat'));
     }
 
     public function jwt(Request $request) {
