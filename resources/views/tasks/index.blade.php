@@ -67,61 +67,61 @@
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-success">已完成</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a>&nbsp;&nbsp;<a href="#">下载</a></td>
+                                    <td><a href="/tasks/show">详情</a>&nbsp;&nbsp;<a href="#">下载</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                                 <tr>
                                     <td>AD2017040111193611</td>
                                     <td><span class="label label-primary">处理中</span></td>
                                     <td>2017/04/02 18:22:12</td>
-                                    <td><a href="#">详情</a></td>
+                                    <td><a href="/tasks/show">详情</a></td>
                                 </tr>
                             </tbody>
                         </table>

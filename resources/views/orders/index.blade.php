@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','订单')
+@section('page_heading', '订单')
 @section('section')
     <div class="col-sm-12">
         <div class="row">

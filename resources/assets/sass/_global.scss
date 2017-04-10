@@ -39,6 +39,10 @@
     }
 }
 
+.table.table-nobordered>tbody>tr>td {
+    // border: none;
+}
+
 #captcha_img {
     padding-top: 5px;
 }

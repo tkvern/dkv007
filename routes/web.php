@@ -44,6 +44,12 @@ Route::get('/tasks', function()
 	return View::make('tasks.index');
 });
 
+
+Route::get('/tasks/show', function()
+{
+	return View::make('tasks.show');
+});
+
 Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/profile', 'UserController@update_profile');
 
