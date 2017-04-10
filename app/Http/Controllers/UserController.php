@@ -31,7 +31,7 @@ class UserController extends Controller
         $user = $request->user();
         $user->password = bcrypt($request->input('password'));
         $user->save();
-        flash('密码更新成功');
+        flash('密码更新成功', 'success');
         return redirect()->back();
     }
 

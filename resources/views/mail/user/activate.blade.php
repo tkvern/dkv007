@@ -1,6 +1,6 @@
 @component('mail::message')
 
-{{ $user_name }}，您好！
+# {{ $user_name }}，您好！
 
 欢迎使用量子云！
 
@@ -13,6 +13,5 @@
 此致
 
 量子云团队支持
-
 
 @endcomponent
