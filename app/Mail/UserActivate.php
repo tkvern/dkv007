@@ -32,7 +32,7 @@ class UserActivate extends Mailable
     public function build()
     {
         return $this->markdown('mail.user.activate')
-                        ->subject('激活新的 量子云 账户')
+                        ->subject('量子云 激活新的账户')
                         ->with(['token' => $this->user->getActivateToken(), 'user_name' => $this->user->username]);
     }
 }

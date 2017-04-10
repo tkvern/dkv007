@@ -33,7 +33,19 @@ Route::get('/user/activate/{token}', 'Auth\ActivateController@activate')->name('
 // 	return View::make('home');
 // });
 
-Route::get('/task_orders', 'TaskOrders@index');
+Route::get('/orders', 'TaskOrders@index');
+
+
+Route::get('/tasks', function()
+{
+	return View::make('tasks.index');
+});
+
+
+Route::get('/tasks/show', function()
+{
+	return View::make('tasks.show');
+});
 
 Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/profile', 'UserController@update_profile');
