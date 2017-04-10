@@ -41,8 +41,8 @@
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> 控制台</a>
                         </li>
-                        <li {{ (Request::is('*task_orders') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('task_orders') }}"><i class="fa fa-shopping-cart fa-fw"></i> 订单</a>
+                        <li {{ (Request::is('*orders') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('orders') }}"><i class="fa fa-shopping-cart fa-fw"></i> 订单</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-cog fa-fw"></i> 账户设置<span class="fa arrow"></span></a>

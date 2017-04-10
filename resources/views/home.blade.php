@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">124</div>
-                                <div>等待接收VR订单</div>
+                                <div>等待接收成片</div>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">26</div>
-                                <div>处理中VR订单</div>
+                                <div>处理中订单</div>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">13</div>
-                                <div>错误VR订单</div>
+                                <div>错误订单</div>
                             </div>
                         </div>
                     </div>
