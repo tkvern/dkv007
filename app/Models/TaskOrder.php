@@ -9,6 +9,13 @@ class TaskOrder extends Model
     public $incrementing = false;
     protected $primaryKey = 'out_trade_no';
 
+    public static $payStateMap = [
+        'pay_free' => '免费',
+        'pay_waiting' => '等待支付',
+        'pay_success' => '支付完成',
+        'pay_cancel' => '取消支付'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,5 +68,17 @@ class TaskOrder extends Model
         $order->deliver_type = $deliver_type;
         $order->state = 'created';
         return $order;
+    }
+
+    public static function payStateLabel($payState) {
+        return isset(self::$payStateMap[$payState]) ? self::$payState[$payState] : '未知';
+    }
+
+    public static function deliverLabel($deliverType) {
+        return $deliverType == 'network' ? '网盘' : '快递';
+    }
+
+    public function iDeliverLabel() {
+        return self::deliverLabel($this->deliver_type);
     }
 }
