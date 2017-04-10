@@ -43,6 +43,17 @@
     padding-top: 5px;
 }
 
+.flash_message {
+    position: fixed;
+    z-index: 9999;
+    // pointer-events: none;
+    top: 12px;
+    right: 12px;
+    .alert {
+        min-width: 260px;
+    }
+}
+
 .table>thead>tr>th {
     min-width: 80px;
 }
