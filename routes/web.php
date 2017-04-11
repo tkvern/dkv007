@@ -37,16 +37,9 @@ Route::get('/orders', 'TaskOrdersController@index');
 Route::get('/orders/{order_id}', 'TaskOrdersController@show');
 
 
-Route::get('/tasks', function()
-{
-	return View::make('tasks.index');
-});
+Route::get('/tasks', 'TasksController@index');
 
-
-Route::get('/tasks/show', function()
-{
-	return View::make('tasks.show');
-});
+Route::get('/tasks/{task_id}', 'TasksController@show');
 
 Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/profile', 'UserController@update_profile');

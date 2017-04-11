@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Task\HandleParameter;
 
 class Task extends Model
 {
+    use HandleParameter;
     protected $fillable = ['name', 'local_dir', 'handle_params', 'deliver_type'];
 
     protected $casts = [
@@ -46,5 +48,9 @@ class Task extends Model
 
     public function iPayLabel() {
         return TaskOrder::payStateLabel($this->pay_state);
+    }
+
+    public function formatHandleParams() {
+
     }
 }

@@ -20,6 +20,10 @@
                                         <td class="text-right">{{ $order->out_trade_no }}</td>
                                     </tr>
                                     <tr>
+                                        <td>订单名称</td>
+                                        <td class="text-right">{{ $order->trade_name }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>创建时间</td>
                                         <td class="text-right">{{ $order->created_at }}</td>
                                     </tr>
@@ -28,16 +32,12 @@
                                         <td class="text-right">{{ $order->updated_at }}</td>
                                     </tr>
                                     <tr>
-                                        <td>订单名称</td>
-                                        <td class="text-right">{{ $order->trade_name }}</td>
-                                    </tr>
-                                    <tr>
                                         <td>提交方式</td>
                                         <td class="text-right">{{ $order->iDeliverLabel() }}</td>
                                     </tr>
                                     <tr>
                                         <td>支付状态</td>
-                                        <td class="text-right"><span class="label label-success">{{ $order->iPayStateLabel()  }}</span></td>
+                                        <td class="text-right">{{ $order->iPayStateLabel() }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,9 +62,9 @@
                                 @foreach($order->tasks as $task)
                                 <tr>
                                     <td>{{ $task->name }}</td>
-                                    <td><span class="label label-success">{{ $task->iStateLabel() }}</span></td>
+                                    <td>{{ $task->iStateLabel() }}</td>
                                     <td>{{ $task->updated_at }}</td>
-                                    <td><a href="/tasks/show">详情</a>&nbsp;&nbsp;<a href="#">下载</a></td>
+                                    <td><a href="{{ url("tasks/{$task->id}") }}">详情</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

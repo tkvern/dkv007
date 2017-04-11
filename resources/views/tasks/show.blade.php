@@ -7,63 +7,63 @@
                 @section ('order_panel_title','作业详情')
                 @section ('order_panel_body')
                     <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>作业状态</td>
-                                        <td class="text-right"><span class="label label-success">已完成</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>订单号</td>
-                                        <td class="text-right">AD2017040111193611</td>
-                                    </tr>
-                                    <tr>
-                                        <td>作业名</td>
-                                        <td class="text-right">AD2017040111193611</td>
-                                    </tr>
-                                    <tr>
-                                        <td>创建时间</td>
-                                        <td class="text-right">2017/04/02 18:22:12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>更新时间</td>
-                                        <td class="text-right">2017/04/02 18:22:12</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">作业参数
-                                        <br /><br />
-                                          <table class="table table-condensed">
-                                            <tr>
-                                              <td>尺寸</td>
-                                              <td class="text-right">8K</td>
-                                            </tr>
-                                            <tr>
-                                              <td>调色服务</td>
-                                              <td class="text-right">否</td>
-                                            </tr>
-                                            <tr>
-                                              <td>修图服务</td>
-                                              <td class="text-right">否</td>
-                                            </tr>
-                                            <tr>
-                                              <td>序列帧</td>
-                                              <td class="text-right">是</td>
-                                            </tr>
-                                          </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>成片地址</td>
-                                        <td class="text-right"><a href="#">下载</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>订单号</td>
+                                <td class="text-right"><a href="{{ url("orders/{$task->order_no}") }}">{{ $task->order_no }}</a></td>
+                            </tr>
+                            <tr>
+                                <td>作业名</td>
+                                <td class="text-right">{{ $task->name }}</td>
+                            </tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td class="text-right">{{ $task->created_at }}</td>
+                            </tr>
+                            <tr>
+                                <td>更新时间</td>
+                                <td class="text-right">{{ $task->updated_at }}</td>
+                            </tr>
+                            <tr>
+                                <td>作业状态</td>
+                                <td class="text-right">{{ $task->iStateLabel() }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">作业参数
+                                    <br /><br />
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <td>输出尺寸</td>
+                                            <td class="text-right">{{ implode(', ', $task->getReadableSizeList()) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>输出维数</td>
+                                            <td class="text-right">{{ implode(', ', $task->getReadableDimensionList()) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>视频格式</td>
+                                            <td class="text-right">{{ implode(', ', $task->getReadableFormatList()) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>播放平台 </td>
+                                            <td class="text-right">{{ implode(', ', $task->getReadablePlatformList()) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>附加服务 </td>
+                                            <td class="text-right">{{ implode(', ', $task->getReadableExtraList()) }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 @endsection
                 @include('widgets.panel', array('header'=>true, 'as'=>'order', 'class'=>'success'))

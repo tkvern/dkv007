@@ -32,6 +32,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="pull-right">
+                            {{ $orders->links() }}
+                        </div>
                     @endsection
                     @include('widgets.panel', array('header'=>true, 'as'=>'orders'))
             </div>
