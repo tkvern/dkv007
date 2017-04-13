@@ -42,7 +42,7 @@ class ActivateController extends Controller
         if (!$user->isActivated()) {
             $user->activated_at = Carbon::now();
             $user->save();
-            flash('用户激活成功', 'success');
+            flash('用户激活成功, 请登录', 'success');
             return redirect(route('login'));
         }
         return redirect(route('login'))->withInput(['account' => $user->email]);
