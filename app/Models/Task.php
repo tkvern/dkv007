@@ -7,6 +7,26 @@ use App\Traits\Task\HandleParameter;
 
 class Task extends Model
 {
+    // 任务状态常量
+    const H_RES_PENDING = '20201';
+    const H_RES_RECEIVED = '20202';
+    const H_JOINT = '20203';
+    const H_POST_PROCESSING = '20204';
+    const H_MOVIE_GENERATING = '20205';
+    const H_MOVIE_DELIVERING = '20206';
+    const H_MOVIE_ACCEPTED = '20207';
+
+    public static $StateMap = [
+        self::H_RES_PENDING => '素材接受中',
+        self::H_RES_RECEIVED => '素材接受完成',
+        self::H_JOINT => '拼接处理中',
+        self::H_POST_PROCESSING => '后期处理中',
+        self::H_MOVIE_GENERATING => '成品生成中',
+        self::H_MOVIE_DELIVERING => '成品已发出等待验收',
+        self::H_MOVIE_ACCEPTED => '已验收',
+    ];
+
+
     use HandleParameter;
     protected $fillable = ['name', 'local_dir', 'handle_params', 'deliver_type'];
 
@@ -28,14 +48,7 @@ class Task extends Model
      * @return string
      */
     public static function stateLabel($state) {
-        switch ($state) {
-            case 'resource_waiting':
-                return '等待素材上传';
-            case 'resource_uploaded':
-                return '素材上传完成';
-            default:
-                return $state;
-        }
+       return isset(self::$StateMap[$state]) ? self::$StateMap[$state] : '未知';
     }
 
     public function iStateLabel() {
@@ -50,7 +63,7 @@ class Task extends Model
         return TaskOrder::payStateLabel($this->pay_state);
     }
 
-    public function formatHandleParams() {
+    public function readableHandleParams() {
 
     }
 }

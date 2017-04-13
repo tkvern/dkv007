@@ -6,15 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskOrder extends Model
 {
+    // 支付状态
+    const PAY_PENDING = '20101';
+    const PAY_SUCCESS = '20102';
+    const PAY_FREE = '20103';
+
+    // 订单状态
+    const Ord_HANDING = '20301';
+    const Ord_REFUNDING = '20302';
+    const Ord_COMPLETE = '20303';
+
+    public static $PayStateMap = [
+        self::PAY_FREE => '免费',
+        self::PAY_PENDING => '等待支付',
+        self::PAY_SUCCESS => '支付完成',
+    ];
+
+    public static $StateMap = [
+        self::Ord_HANDING => '进行中',
+        self::Ord_REFUNDING => '退款中',
+        self::Ord_COMPLETE => '已完成',
+    ];
+
     public $incrementing = false;
     protected $primaryKey = 'out_trade_no';
-
-    public static $payStateMap = [
-        'pay_free' => '免费',
-        'pay_waiting' => '等待支付',
-        'pay_success' => '支付完成',
-        'pay_cancel' => '取消支付'
-    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -60,18 +75,16 @@ class TaskOrder extends Model
      */
     public static function make($user, $deliver_type, $price, $real_price) {
         $order = new TaskOrder();
-        $order->out_trade_no = static::genOrderNO();
         $order->user_id = $user->id;
         $order->user_name = $user->name;
         $order->total_price = $price;
         $order->real_price = $real_price;
         $order->deliver_type = $deliver_type;
-        $order->state = 'created';
         return $order;
     }
 
     public static function payStateLabel($payState) {
-        return isset(self::$payStateMap[$payState]) ? self::$payStateMap[$payState] : '未知';
+        return isset(self::$PayStateMap[$payState]) ? self::$PayStateMap[$payState] : '未知';
     }
 
     public function iPayStateLabel() {
@@ -84,5 +97,18 @@ class TaskOrder extends Model
 
     public function iDeliverLabel() {
         return self::deliverLabel($this->deliver_type);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function($instance) {
+           if (empty($instance->out_trade_no)) {
+               $instance->out_trade_no = self::genOrderNO();
+           }
+           if (empty($instance->state)) {
+               $instance->state = self::Ord_HANDING;
+           }
+        });
     }
 }
