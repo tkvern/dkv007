@@ -18,8 +18,8 @@ class TaskOrder extends Model
 
     public static $PayStateMap = [
         self::PAY_FREE => '免费',
-        self::PAY_PENDING => '等待支付',
-        self::PAY_SUCCESS => '支付完成',
+        self::PAY_PENDING => '待支付',
+        self::PAY_SUCCESS => '已支付',
     ];
 
     public static $StateMap = [

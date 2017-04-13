@@ -37,7 +37,7 @@
                                     </tr>
                                     <tr>
                                         <td>支付状态</td>
-                                        <td class="text-right">{{ $order->iPayStateLabel() }}</td>
+                                        <td class="text-right">{!! get_color_by_pay_state($order->pay_state, $order->iPayStateLabel()) !!}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,7 +62,7 @@
                                 @foreach($order->tasks as $task)
                                 <tr>
                                     <td>{{ $task->name }}</td>
-                                    <td>{{ $task->iStateLabel() }}</td>
+                                    <td>{!! get_color_by_handle_state($task->handle_state, $task->iStateLabel()) !!}</td>
                                     <td>{{ $task->updated_at }}</td>
                                     <td><a href="{{ url("tasks/{$task->id}") }}">详情</a></td>
                                 </tr>

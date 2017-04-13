@@ -55,7 +55,7 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new UserActivate($user));
 
-        flash('确认邮件已发送到你的邮箱, 请前往激活', 'success');
+        flash('确认邮件已发送到您的邮箱, 请前往激活', 'success');
         return redirect(route('user.activate_email', ['email' => $user->email]));
 //        $this->guard()->login($user);
 //
@@ -96,7 +96,7 @@ class RegisterController extends Controller
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],
-            'account_type' => 'person',
+            'account_type' => $data['account_type'],
             'name' => $data['name'],
             'phone_number' => $data['phone_number'],
             'country' => $data['country'],

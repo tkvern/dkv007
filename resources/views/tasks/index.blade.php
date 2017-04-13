@@ -19,7 +19,7 @@
                         @foreach($tasks as $task)
                         <tr>
                             <td>{{ $task->name }}</td>
-                            <td>{{ $task->iStateLabel() }}</td>
+                            <td>{!! get_color_by_handle_state($task->handle_state, $task->iStateLabel()) !!}</td>
                             <td>{{ $task->created_at }}</td>
                             <td>{{ $task->updated_at }}</td>
                             <td><a href="{{ url("tasks/{$task->id}") }}">详情</a></td>

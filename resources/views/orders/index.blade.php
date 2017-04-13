@@ -24,7 +24,7 @@
                                         <td>{{ $order->out_trade_no }}</td>
                                         <td>{{ $order->trade_name }}</td>
                                         <td>{{ $order->iDeliverLabel() }}</td>
-                                        <td>{{ $order->iPayStateLabel() }}</td>
+                                        <td>{!! get_color_by_pay_state($order->pay_state, $order->iPayStateLabel()) !!}</td>
                                         <td>{{ $order->created_at }}</td>
                                         <td><a href="{{ url("/orders/{$order->out_trade_no}") }}">详情</a></td>
                                     </tr>
