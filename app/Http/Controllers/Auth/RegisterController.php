@@ -54,7 +54,9 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         Mail::to($user->email)->send(new UserActivate($user));
-        return redirect(route('user.activate_email', ['email' => $user->email]))->with(['flash_message' => '确认邮件已发送到你的邮箱, 请前往激活。']);
+
+        flash('确认邮件已发送到你的邮箱, 请前往激活', 'success');
+        return redirect(route('user.activate_email', ['email' => $user->email]));
 //        $this->guard()->login($user);
 //
 //        return $this->registered($request, $user)

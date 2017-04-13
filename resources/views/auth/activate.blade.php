@@ -7,7 +7,7 @@
         <br /><br /><br />
             @section ('reset_panel_title','量子云 账号激活')
             @section ('reset_panel_body')
-                @if (Session::has('flash_message'))
+                {{-- @if (Session::has('flash_message'))
                     <div class="alert alert-success">
                         {{ session('flash_message') }}
                     </div>
@@ -17,7 +17,7 @@
                     <div class="alert alert-error">
                         {{ session('flash_error_message') }}
                     </div>
-                @endif
+                @endif --}}
 
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('user.activate_email') }}">
                     {{ csrf_field() }}

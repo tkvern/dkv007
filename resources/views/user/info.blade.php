@@ -62,7 +62,7 @@
                             @if($user->account_bypte == 'person')
                                 <label for="name" class="col-md-4 col-sm-4 control-label text-right">姓名</label>
                             @else
-                                <label for="name" class="col-md-4 col-sm-4 control-label text-right">公司名称</label>
+                                <label for="name" class="col-md-4 col-sm-4 control-label text-right">名称</label>
                             @endif
                             <div class="col-md-8 col-sm-8">
                                 <input
