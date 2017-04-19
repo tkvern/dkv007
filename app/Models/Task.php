@@ -17,8 +17,8 @@ class Task extends Model
     const H_MOVIE_ACCEPTED = '20207';
 
     public static $StateMap = [
-        self::H_RES_PENDING => '素材接受中',
-        self::H_RES_RECEIVED => '素材接受完成',
+        self::H_RES_PENDING => '素材接收中',
+        self::H_RES_RECEIVED => '素材接收完成',
         self::H_JOINT => '拼接处理中',
         self::H_POST_PROCESSING => '后期处理中',
         self::H_MOVIE_GENERATING => '成品生成中',

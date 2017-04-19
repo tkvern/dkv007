@@ -34,7 +34,7 @@ class ActivateController extends Controller
         try {
             $payload = $manager->decode(new Token($token))->get();
         } catch (Exception $e) {
-            flash('无效的激活链接，请重新获取激活邮件', 'error');
+            flash('无效的激活链接，请重新获取激活邮件', 'danger');
             return redirect(route('user.activate_email'));
         }
         $email = $payload['sub'];

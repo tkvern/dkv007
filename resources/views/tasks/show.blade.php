@@ -33,7 +33,7 @@
                             </tr>
                             <tr>
                                 <td>作业状态</td>
-                                <td class="text-right">{{ $task->iStateLabel() }}</td>
+                                <td class="text-right">{!! get_color_by_handle_state($task->handle_state, $task->iStateLabel()) !!}</td>
                             </tr>
                             <tr>
                                 <td colspan="2">作业参数

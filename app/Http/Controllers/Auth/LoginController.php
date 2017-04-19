@@ -67,7 +67,7 @@ class LoginController extends Controller
         if (!$user) {
             return redirect()->back()->withErrors(['account' => '账号不存在']);
         } else if (!$user->isActivated()) {
-            flash('用户还未激活， 请先进行激活', 'error');
+            flash('用户还未激活， 请先进行激活', 'danger');
             return redirect(route('user.activate_email'));
         } else if (password_verify($request->input('password'), $user->password)) {
             $user->login_ip = $request->getClientIp();

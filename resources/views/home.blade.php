@@ -13,7 +13,7 @@
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge">{{ $orderStat['total'] }}</div>
-                                <div>处理中订单</div>
+                                <div>所有订单</div>
                             </div>
                         </div>
                     </div>
@@ -34,8 +34,8 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">26</div>
-                                <div>处理中作业</div>
+                                <div class="huge">{{ $taskStat['total'] }}</div>
+                                <div>所有作业</div>
                             </div>
                         </div>
                     </div>
