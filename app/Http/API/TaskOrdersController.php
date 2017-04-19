@@ -46,7 +46,7 @@ class TaskOrdersController extends Controller
                 $expressInfo = $request->input('express_info');
                 $express = new OrderExpress([
                     'deliver_address' => $expressInfo['deliver_address'],
-                    'contact_address' => $expressInfo['contact_address'],
+                    'contact_user' => $expressInfo['contact_user'],
                     'contact_phone_number' => $expressInfo['contact_phone_number'],
                 ]);
                 $order->express()->save($express);
@@ -67,7 +67,7 @@ class TaskOrdersController extends Controller
                 $newTask->user_id = $user->id;
                 $newTask->user_name = $user->name;
                 $newTask->pay_state = $order->pay_state;
-                $newTask->handle_state = 'resource_waiting';
+                $newTask->handle_state = Task::H_RES_PENDING;
                 array_push($newTasks, $newTask);
                 //$newTask->save();
             }
@@ -89,7 +89,7 @@ class TaskOrdersController extends Controller
             'tasks.*.handle_params' => 'required|array',
         ]);
         $validator->sometimes(
-            ['express_info.deliver_address', 'express_info.contact_address', 'express_info.contact_phone_number'],
+            ['express_info.deliver_address', 'express_info.contact_user', 'express_info.contact_phone_number'],
             'required',
             function($input) {
                 return $input->deliver_type == 'express';
