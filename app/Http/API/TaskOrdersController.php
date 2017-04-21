@@ -40,7 +40,7 @@ class TaskOrdersController extends Controller
             $order = TaskOrder::make($user, $request->input('deliver_type'), 0, 0);
             $order->trade_name = 'trade_'.date('ymdHis');
             $order->pay_type = '';
-            $order->pay_state = 'pay_free';
+            $order->pay_state = TaskOrder::PAY_FREE;
             $order->save();
             if ($request->input('deliver_type') == 'express') {
                 $expressInfo = $request->input('express_info');
@@ -66,7 +66,6 @@ class TaskOrdersController extends Controller
                 $newTask->real_price = 0;
                 $newTask->user_id = $user->id;
                 $newTask->user_name = $user->name;
-                $newTask->pay_state = $order->pay_state;
                 $newTask->handle_state = Task::H_RES_PENDING;
                 array_push($newTasks, $newTask);
                 //$newTask->save();

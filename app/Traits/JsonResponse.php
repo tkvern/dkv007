@@ -24,6 +24,7 @@ Trait JsonResponse
 
     protected function errorJsonResponse($errCode, $errors, $statusCode=200)
     {
+        info("api error response: $errors");
         return response()->json([
             'err_code' => $errCode,
             'err_msg' => $errors,

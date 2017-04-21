@@ -7,6 +7,8 @@ use App\Traits\Task\HandleParameter;
 
 class Task extends Model
 {
+    use HandleParameter;
+
     // 任务状态常量
     const H_RES_PENDING = '20201';
     const H_RES_RECEIVED = '20202';
@@ -26,9 +28,11 @@ class Task extends Model
         self::H_MOVIE_ACCEPTED => '已验收',
     ];
 
-
-    use HandleParameter;
     protected $fillable = ['name', 'local_dir', 'handle_params', 'deliver_type'];
+
+    protected $appends = ['order_state', 'order_pay_state'];
+
+    protected $hidden = ['order'];
 
     protected $casts = [
         'handle_params' => 'array',
@@ -65,5 +69,17 @@ class Task extends Model
 
     public function readableHandleParams() {
 
+    }
+
+    public function getOrderStateAttribute() {
+        return $this->order->state;
+    }
+
+    public function getOrderPayStateAttribute() {
+        return $this->order->pay_state;
+    }
+
+    public function hasPayed() {
+        return $this->order->pay_state == TaskOrder::PAY_SUCCESS || $this->order->pay_state == TaskOrder::PAY_FREE;
     }
 }
