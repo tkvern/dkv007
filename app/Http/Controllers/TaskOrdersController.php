@@ -9,7 +9,7 @@ class TaskOrdersController extends Controller
     //
     public function index(Request $request) {
         $user = $request->user();
-        $orders = $user->taskOrders()->paginate(10);
+        $orders = $user->taskOrders()->orderBy('updated_at', 'desc')->paginate(10);
         return view('orders.index', ['orders' => $orders]);
     }
 
