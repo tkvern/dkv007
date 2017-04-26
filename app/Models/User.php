@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Notifications\ResetPassword;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -69,12 +70,14 @@ class User extends Authenticatable implements JWTSubject
      * return a token for activating user
      */
     public function getActivateToken() {
-        $factory = app('tymon.jwt.payload.factory')->sub($this->email)->setTTL(config('jwt.activate_ttl'));
-        $payload = $factory->make();
-        // $exp = $payload->getClaims()['exp'];
-        // $exp->setValue(time() + 7200);
-        $manager = app('tymon.jwt.manager');
-        $token = $manager->encode($payload)->get();
+        config(['jwt.ttl' => config('auth.activate_ttl')]);
+        $token = JWTAuth::fromUser($this);
+//        $factory = app('tymon.jwt.payload.factory')->sub($this->email)->setTTL(config('auth.activate_ttl'));
+//        $payload = $factory->make();
+//        // $exp = $payload->getClaims()['exp'];
+//        // $exp->setValue(time() + 7200);
+//        $manager = app('tymon.jwt.manager');
+//        $token = $manager->encode($payload)->get();
         return $token;
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'activate_ttl' => env('ACTIVATE_TTL', 2*60),
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

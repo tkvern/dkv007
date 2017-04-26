@@ -37,8 +37,8 @@ class ActivateController extends Controller
             flash('无效的激活链接，请重新获取激活邮件', 'danger');
             return redirect(route('user.activate_email'));
         }
-        $email = $payload['sub'];
-        $user = User::where('email', $email)->firstOrFail();
+        $uid = $payload['sub'];
+        $user = User::findOrFail($uid);
         if (!$user->isActivated()) {
             $user->activated_at = Carbon::now();
             $user->save();

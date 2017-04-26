@@ -27,12 +27,6 @@ Route::get('/user/activate/{token}', 'Auth\ActivateController@activate')->name('
 // Route::get('/jwt', 'HomeController@jwt');
 // Route::get('/decode_jwt/{token}', 'HomeController@decode_jwt');
 
-// sb-admin
-// Route::get('/', function()
-// {
-// 	return View::make('home');
-// });
-
 Route::get('/orders', 'TaskOrdersController@index');
 Route::get('/orders/{order_id}', 'TaskOrdersController@show');
 

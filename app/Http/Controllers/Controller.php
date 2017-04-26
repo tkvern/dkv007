@@ -16,14 +16,15 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:web');
         $route = Route::currentRouteAction();
-        list($this->controller, $action) = explode('@', $route);
+        list($controller, $action) = explode('@', $route);
 
         // 取得Controller 的名字，不包含 namespace.
-        $controller_name = substr($this->controller, strrpos($this->controller, "\\") + 1);
+        $controller_name = substr($controller, strrpos($controller, "\\") + 1);
 
         View::share('controller', $controller_name );
+        View::share('action', $action);
         View::share('input', Input::all());
     }
 }
