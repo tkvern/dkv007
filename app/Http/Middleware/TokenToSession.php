@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class TokenToSession
 {
@@ -16,6 +17,9 @@ class TokenToSession
      */
     public function handle($request, Closure $next)
     {
+        if ($request->path() == 'password/reset') {
+            return $next($request);
+        }
         $token = $request->input('token');
         if (!empty($token)) {
             try {
