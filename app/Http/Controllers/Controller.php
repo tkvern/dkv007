@@ -18,7 +18,14 @@ class Controller extends BaseController
     {
         $this->middleware('auth:web');
         $route = Route::currentRouteAction();
-        list($controller, $action) = explode('@', $route);
+
+        $segmaent = explode('@', $route);
+        if (count($segmaent) === 2) {
+            list($controller, $action) = $segmaent;
+        } else {
+            $controller = $route;
+            $action = 'index';
+        }
 
         // 取得Controller 的名字，不包含 namespace.
         $controller_name = substr($controller, strrpos($controller, "\\") + 1);
