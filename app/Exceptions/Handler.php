@@ -83,7 +83,7 @@ class Handler extends ExceptionHandler
             }
             return response()->json([
                 'err_code' => '422',
-                'err_msg' => implode(', ', $flat_errors)
+                'err_msg' => implode(' ', $flat_errors)
             ]);
         }
         return response()->json([
