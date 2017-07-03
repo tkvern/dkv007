@@ -45,7 +45,7 @@ class UploadController extends Controller
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
             $inputPath = $preFix . $path;
             
-            $cmd = "echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpg";
+            $cmd = "echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
             exec($cmd, $output, $result);
 
