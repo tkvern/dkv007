@@ -24,12 +24,14 @@ class UploadController extends Controller
             $ret = array();
             $string = str_random(10);
             $user = $request->user();
-            $path = 'vr/file/' . $user->id .'/' . $string;
+            $path = $origin . 'vr/file/' . $user->id .'/' . $string;
+            $origin = Config::get('app.url');
+            $url = $origin . "/storage/" . $path;
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
                 $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
-                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => $fileName, "path" => $path ];
+                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => $fileName, "url" => $url ];
             }
             else  //Multiple files, file[]
             {
