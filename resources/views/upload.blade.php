@@ -63,6 +63,7 @@
                             onSuccess:function(files,data,xhr,pd) {
                                 // $("input[name='cover_image']").val(JSON.parse(data)[0])
                                 // console.log(data);
+                                var data = JSON.parse(data)[0];
                                 $("#preview").empty();
                                 $("#preview").append("<p>登录已失效，请刷新后重新登录!<p/><div id='qrcode'></div><a href='" + data.url + "'>" + data.url + "</a>")
                                 qrcode = new QRCode("qrcode", {
