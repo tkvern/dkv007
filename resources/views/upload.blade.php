@@ -58,7 +58,8 @@
                             },
                             onSuccess:function(files,data,xhr,pd) {
                                 //$("input[name='cover_image']").val(JSON.parse(data)[0])
-                                console.log(JSON.parse(data));
+                                console.log(data);
+                                window.open(data.url);
                             },
                         });
                     } else {
