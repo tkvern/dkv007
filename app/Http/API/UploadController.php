@@ -27,7 +27,7 @@ class UploadController extends Controller
             $path = 'vr/file/' . $user->id .'/' . $string;
             $origin = config('app.url');
 
-            $url = $origin . "/storage/" . $path;
+            $url = $origin . "/storage/" . $path . "/vtour/";
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
@@ -48,7 +48,7 @@ class UploadController extends Controller
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
             $inputPath = $preFix . $path;
             
-            $cmd = "echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
+            $cmd = "sudo echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
             exec($cmd, $output, $result);
 
