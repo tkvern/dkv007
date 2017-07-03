@@ -24,7 +24,7 @@ class UploadController extends Controller
             $ret = array();
             $string = str_random(10);
             $user = $request->user();
-            $path = $origin . 'vr/file/' . $user->id .'/' . $string;
+            $path = 'vr/file/' . $user->id .'/' . $string;
             $origin = Config::get('app.url');
             $url = $origin . "/storage/" . $path;
 
