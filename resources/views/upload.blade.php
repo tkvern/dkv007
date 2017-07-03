@@ -11,15 +11,19 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script src="/js/jquery.form.js"></script>
   <script src="/js/jquery.uploadfile.js"></script>
+  <script src="/js/qrcode.js"></script>
 
   <input type="text" name="account" placeholder="账号">
   <input type="password" name="password" placeholder="密码">
   <button id="login">登录</button>
   
-  <div id="fileuploader">Upload</div>
+  <div id="fileuploader">Upload</div><br><br><br>
+  <div id="preview">
+  </div>
 
   <script>
     var access_token;
+    var qrcode;
     $('#login').on('click', function() {
         var account = $("input[name='account']").val();
         var password = $("input[name='password']").val()
@@ -36,7 +40,7 @@
                         console.log(data.access_token);
                         access_token = data.access_token;
                         $("#fileuploader").uploadFile({
-                            url: "/api/upload/file",
+                            url: "http://cloud.visiondk.com/api/upload/file",
                             fileName: "myfile",
                             maxFileSize: 200*1024*1024,
                             multiple: false,
@@ -50,16 +54,26 @@
                             deleteCallback: function (data, pd) {
                                 var data = JSON.parse(data);
                                 for (var i = 0; i < data.length; i++) {
-                                    $.post("/api/upload/delete", {op: "delete",name: data[i]});
+                                    $.post("http://cloud.visiondk.com/api/upload/delete", {op: "delete",name: data[i]});
                                 }
                                 $("input[name='cover_image']").val('');
                                 pd.statusbar.hide(); //You choice.
 
                             },
                             onSuccess:function(files,data,xhr,pd) {
-                                //$("input[name='cover_image']").val(JSON.parse(data)[0])
-                                console.log(data);
-                                window.open(data.url);
+                                // $("input[name='cover_image']").val(JSON.parse(data)[0])
+                                // console.log(data);
+                                $("#preview").empty();
+                                $("#preview").append("<p>登录已失效，请刷新后重新登录!<p/><div id='qrcode'></div><a href='" + data.url + "'>" + data.url + "</a>")
+                                qrcode = new QRCode("qrcode", {
+                                    text: data.url,
+                                    width: 128,
+                                    height: 128,
+                                    colorDark : "#000000",
+                                    colorLight : "#ffffff",
+                                    correctLevel : QRCode.CorrectLevel.H
+                                });
+                                
                             },
                         });
                     } else {
