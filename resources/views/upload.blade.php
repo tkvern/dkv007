@@ -65,7 +65,7 @@
                                 // console.log(data);
                                 var data = JSON.parse(data)[0];
                                 $("#preview").empty();
-                                $("#preview").append("<p>登录已失效，请刷新后重新登录!<p/><div id='qrcode'></div><a href='" + data.url + "'>" + data.url + "</a>")
+                                $("#preview").append("<p>登录已失效，请刷新后重新登录!<p/><div id='qrcode'></div><a href='" + data.url + "' target='_blank'>" + data.url + "</a>")
                                 qrcode = new QRCode("qrcode", {
                                     text: data.url,
                                     width: 128,
