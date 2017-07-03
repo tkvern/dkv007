@@ -25,7 +25,8 @@ class UploadController extends Controller
             $string = str_random(10);
             $user = $request->user();
             $path = 'vr/file/' . $user->id .'/' . $string;
-            $origin = Config::get('app.url');
+            $origin = config('app.url');
+
             $url = $origin . "/storage/" . $path;
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
