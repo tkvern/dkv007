@@ -22,4 +22,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user/tasks', 'TasksController@index');
     Route::get('/user/tasks/{task_id}', 'TasksController@show');
     Route::post('user/tasks/{task_id}/storage', 'TasksController@updateStorage');
+
+    // Route::post('/upload/image', 'UploadController@storeImage');
+    Route::post('/upload/file', 'UploadController@storeFile');
+    // Route::post('/upload/delete', 'UploadController@deleteFile');
 });
