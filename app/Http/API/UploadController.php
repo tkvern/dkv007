@@ -5,6 +5,7 @@ namespace App\Http\API;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use League\Flysystem\Exception;
 
 class UploadController extends Controller
 {
@@ -27,18 +28,32 @@ class UploadController extends Controller
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
-                $fileName = $request->file('myfile')->store($path, 'public');
-                $ret[]= $fileName;
+                $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
+                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => $fileName, "path" => $path ];
             }
             else  //Multiple files, file[]
             {
-              $allFiles = $request->allFiles();
-              foreach($allFiles as $file) {
-                $fileName = $request->file('myfile')->store($path, 'public');
-                $ret[]= $fileName;
-              }
+            //   $allFiles = $request->allFiles();
+            //   foreach($allFiles as $file) {
+            //     $fileName = $request->file('myfile')->store($path, 'public');
+            //     $ret[]= ["fileName" => $fileName, "path" => $path ];
+            //   }
+                // $ret[] = ["err_code" => "400", "err_msg" => "dos not support Multiple files"];
+                return json_encode(["err_code" => "400", "err_msg" => "dos not support Multiple files"]);
             }
-            return json_encode($ret);
+
+            $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
+            $inputPath = $preFix . $path;
+            
+            $cmd = "echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpg";
+            info("exec: $cmd");
+            exec($cmd, $output, $result);
+
+            if($result !=0) {
+                return json_encode(["err_code" => "400", "err_msg" => "An unknown error occurred"]);
+            } else {
+                return json_encode($ret);
+            }
          }
     }
 

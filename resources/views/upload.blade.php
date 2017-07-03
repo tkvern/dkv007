@@ -41,7 +41,7 @@
                             maxFileSize: 200*1024*1024,
                             multiple: false,
                             maxFileCount: 1,
-                            acceptFiles: "image/*",
+                            acceptFiles: "image/jpeg",
                             showDelete: false,
                             showPreview: false,
                             headers: {
