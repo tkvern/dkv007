@@ -32,7 +32,7 @@ class UploadController extends Controller
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
                 $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
-                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => $fileName, "url" => $url ];
+                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => "{$fileName}", "url" => "{$url}" ];
             }
             else  //Multiple files, file[]
             {
