@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::post('/auth', 'AuthController@create');
 Route::group(['middleware' => 'auth:api'], function () {
+    header("Access-Control-Allow-Origin: *");
+    
     Route::get('/user', 'UserController@show');
     Route::post('/user/task_orders', 'TaskOrdersController@create');
     Route::get('/user/task_orders', 'TaskOrdersController@index');
