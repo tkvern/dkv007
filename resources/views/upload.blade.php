@@ -17,7 +17,7 @@
   <input type="text" name="account" placeholder="账号">
   <input type="password" name="password" placeholder="密码">
   <button id="login">登录</button>
-  
+  <br><br>
   <div id="fileuploader">Upload</div><br><br><br>
   <div id="preview">
   </div>
@@ -96,7 +96,6 @@
                             this.download.addClass("custom-green");            
                             this.cancel.addClass("custom-red");
                             this.del.addClass("custom-red");
-                            debugger
                             if(count++ %2 ==0)
                                 this.statusbar.addClass("even");
                             else
