@@ -50,7 +50,7 @@ class UploadController extends Controller
             info("exec: $cmd");
             exec($cmd, $output, $result);
 
-            if(0 ==0) {
+            if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
                 return $this->successJsonResponse([
