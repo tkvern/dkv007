@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link href="/css/uploadfile.css" rel="stylesheet">
 </head>
 <body>
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -39,6 +40,7 @@
                     alert(data.user.username + " 临时登录成功");
                     console.log(data.access_token);
                     access_token = data.access_token;
+                    var count = 0;
                     $("#fileuploader").uploadFile({
                         url: "/api/upload/file",
                         fileName: "myfile",
@@ -77,6 +79,31 @@
                             }
                             
                         },
+                        customProgressBar: function(obj,s) {
+                            this.statusbar = $("<div class='ajax-file-upload-statusbar'></div>");
+                            this.preview = $("<img class='ajax-file-upload-preview' />").width(s.previewWidth).height(s.previewHeight).appendTo(this.statusbar).hide();
+                            this.filename = $("<div class='ajax-file-upload-filename'></div>").appendTo(this.statusbar);
+                            this.progressDiv = $("<div class='ajax-file-upload-progress'>").appendTo(this.statusbar).hide();
+                            this.progressbar = $("<div class='ajax-file-upload-bar'></div>").appendTo(this.progressDiv);
+                            this.abort = $("<div>" + s.abortStr + "</div>").appendTo(this.statusbar).hide();
+                            this.cancel = $("<div>" + s.cancelStr + "</div>").appendTo(this.statusbar).hide();
+                            this.done = $("<div>" + s.doneStr + "</div>").appendTo(this.statusbar).hide();
+                            this.download = $("<div>" + s.downloadStr + "</div>").appendTo(this.statusbar).hide();
+                            this.del = $("<div>" + s.deletelStr + "</div>").appendTo(this.statusbar).hide();
+                            
+                            this.abort.addClass("custom-red");
+                            this.done.addClass("custom-green");
+                            this.download.addClass("custom-green");            
+                            this.cancel.addClass("custom-red");
+                            this.del.addClass("custom-red");
+                            debugger
+                            if(count++ %2 ==0)
+                                this.statusbar.addClass("even");
+                            else
+                                this.statusbar.addClass("odd"); 
+                            return this;
+                            
+                        }
                     });
                 } else {
                     alert(data.err_msg);
