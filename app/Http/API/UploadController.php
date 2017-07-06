@@ -32,7 +32,6 @@ class UploadController extends Controller
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
                 $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
-                $ret[]= ["err_code" => "0", "err_msg" => "SUCCESS" , "fileName" => "{$fileName}", "url" => "{$url}" ];
             }
             else  //Multiple files, file[]
             {
@@ -41,8 +40,7 @@ class UploadController extends Controller
             //     $fileName = $request->file('myfile')->store($path, 'public');
             //     $ret[]= ["fileName" => $fileName, "path" => $path ];
             //   }
-                // $ret[] = ["err_code" => "400", "err_msg" => "dos not support Multiple files"];
-                return json_encode(["err_code" => "400", "err_msg" => "dos not support Multiple files"]);
+                return $this->errorJsonResponse(400, 'dos not support Multiple files');
             }
 
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
@@ -52,10 +50,13 @@ class UploadController extends Controller
             info("exec: $cmd");
             exec($cmd, $output, $result);
 
-            if($result !=0) {
-                return json_encode(["err_code" => "400", "err_msg" => "An unknown error occurred"]);
+            if(0 ==0) {
+                return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
-                return json_encode($ret);
+                return $this->successJsonResponse([
+                    'fileName' => $fileName,
+                    'url' => $url,
+                ]);
             }
          }
     }

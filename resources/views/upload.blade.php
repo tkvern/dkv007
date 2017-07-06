@@ -61,13 +61,6 @@
 
                         },
                         onSuccess:function(files,data,xhr,pd) {
-                            // $("input[name='cover_image']").val(JSON.parse(data)[0])
-                            console.log(data);
-                            var tmp;
-                            if(typeof(data) === "string") {
-                                tmp = JSON.parse(data)[0] || JSON.parse(data);
-                            }
-                            var data = tmp;
                             if (data.err_code == 0) {
                                 $("#preview").empty();
                                 $("#preview").append("<p style='color:red; font-size: 24px;'>登录已失效，请刷新后重新登录!<p/><div id='qrcode'></div><br><a href='" + data.url + "' target='_blank'>" + data.url + "</a>")
