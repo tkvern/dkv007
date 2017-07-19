@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        'api/upload/file'
+        'api/upload/file',
+        '/upload/store'
     ];
 }

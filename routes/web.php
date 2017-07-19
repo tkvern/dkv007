@@ -41,6 +41,9 @@ Route::post('/user/profile', 'UserController@update_profile');
 Route::get('/user/password', 'UserController@password');
 Route::post('/user/password', 'UserController@change_password');
 
+Route::get('/upload/index', 'UploadImageController@index');
+Route::post('/upload/store', 'UploadImageController@store');
+
 
 Route::get('/upload', function() {
   return view('upload');

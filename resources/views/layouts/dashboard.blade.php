@@ -48,6 +48,10 @@
                             <a href="{{ url ('tasks') }}" {{ (Request::is('tasks/*') ? 'class=active' : '') }}><i class="fa fa-tasks fa-fw"></i> 作业</a>
                         </li>
                         <li>
+                            <a href="{{ url ('upload/index') }}" {{ (Request::is('upload/*') ? 'class=active' : '') }}><i class="fa fa-image fa-fw"></i> 全景H5</a>
+                        </li>
+                        
+                        <li>
                             <a href="#"><i class="fa fa-cog fa-fw"></i> 账户设置<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
