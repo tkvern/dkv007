@@ -73,7 +73,7 @@
     $("#fileuploader").uploadFile({
         url: "/upload/store",
         fileName: "myfile",
-        maxFileSize: 50*1024*1024,
+        maxFileSize: 300*1024*1024,
         multiple: false,
         maxFileCount: 1,
         acceptFiles: "image/jpeg",
