@@ -4,7 +4,11 @@
     <div class="col-sm-12">
         @section ('image_panel_title','全景H5列表')
         @section ('image_panel_body')
-            <p class="text-muted">请注意！全景H5链接有效期限为1个月。</p>
+            <p class="text-danger">&nbsp;&nbsp;&nbsp;&nbsp;请注意！</p>
+            <ol class="text-muted">
+                <li>使用专线上传，以保证服务质量。</li>
+                <li>全景H5链接生成当月有效，次月失效。</li>
+            </ol>
             <form method="post" action="{{ url('/upload/store')}}">
                 {{ csrf_field() }}
                 <div id="fileuploader">Upload</div>
