@@ -29,6 +29,7 @@ class UploadController extends Controller
             $origin = config('app.url');
 
             $url = $origin . "/storage/" . $path . "/vtour/";
+            $download = $origin . "/storage/" . $path . "/" . $string . "jpeg";
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
@@ -56,12 +57,14 @@ class UploadController extends Controller
             } else {
                 UploadImage::create([
                         'user_id' => $user->id,
-                        'link' => "{$url}"
+                        'link' => "{$url}",
+                        'download' => "{$download}"
                     ]
                 );
                 return $this->successJsonResponse([
                     'fileName' => $fileName,
-                    'url' => $url
+                    'url' => $url,
+                    'download' => $download
                 ]);
             }
          }

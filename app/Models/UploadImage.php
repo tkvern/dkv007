@@ -7,7 +7,7 @@ use App\Traits\Task\HandleParameter;
 
 class UploadImage extends Model
 {
-    protected $fillable = ['user_id', 'link'];
+    protected $fillable = ['user_id', 'link', 'download'];
 
     public function user() {
         return $this->belongsTo(User::class);

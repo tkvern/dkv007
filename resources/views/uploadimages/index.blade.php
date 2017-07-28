@@ -32,6 +32,11 @@
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ $image->link }}')">
                                     查看二维码
                                 </button>
+                                @if (!empty($image->download))
+                                <a class="btn btn-primary btn-xs" target="_blank" download href="{{ $image->download }}">
+                                    下载图片
+                                </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

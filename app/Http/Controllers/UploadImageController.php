@@ -36,6 +36,7 @@ class UploadImageController extends Controller
             $origin = config('app.url');
 
             $url = $origin . "/storage/" . $path . "/vtour/";
+            $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
@@ -56,19 +57,21 @@ class UploadImageController extends Controller
             
             $cmd = "sudo -Hu ansible echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
-            exec($cmd, $output, $result);
-
+            // exec($cmd, $output, $result);
+            $result = 0;
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
                 UploadImage::create([
                         'user_id' => $user->id,
-                        'link' => "{$url}"
+                        'link' => "{$url}",
+                        'download' => "{$download}"
                     ]
                 );
                 return $this->successJsonResponse([
                     'fileName' => $fileName,
-                    'url' => $url
+                    'url' => $url,
+                    'download' => "{$download}"
                 ]);
             }
          }
