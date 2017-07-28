@@ -57,8 +57,8 @@ class UploadImageController extends Controller
             
             $cmd = "sudo -Hu ansible echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
-            // exec($cmd, $output, $result);
-            $result = 0;
+            exec($cmd, $output, $result);
+            
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
