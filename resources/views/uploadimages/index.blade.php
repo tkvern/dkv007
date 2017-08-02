@@ -8,6 +8,7 @@
             <ol class="text-muted">
                 <li>使用专线上传，以保证服务质量。</li>
                 <li>全景H5链接生成当月有效，次月失效。</li>
+                <li>全景图必须为 宽:高 = 2:1</li>
             </ol>
             <form method="post" action="{{ url('/upload/store')}}">
                 {{ csrf_field() }}
