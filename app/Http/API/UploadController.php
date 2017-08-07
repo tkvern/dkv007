@@ -61,10 +61,10 @@ class UploadController extends Controller
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
             $inputPath = $preFix . $path;
             
-            $cmd = "sudo -Hu ansible echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
+            $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
             exec($cmd, $output, $result);
-            
+
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
