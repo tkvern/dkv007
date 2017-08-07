@@ -20,16 +20,29 @@ class UploadController extends Controller
     public function storeFile(Request $request)
     {
         // $output_dir = storage_path()."/app/public/vr/file/";
+
         if(isset($_FILES["myfile"]))
         {
-            $ret = array();
             $string = str_random(10);
-            $user = $request->user();
-            $path = 'vr/file/' . $user->id .'/' . $string;
+            if (!empty($request->header('user_id'))) {
+                $user_id = $request->header('user_id');
+            } else {
+                $user_id = $request->user()->id;
+            }
+
+            if (!empty($request->header('order_no'))) {
+                $order_no = $request->header('order_no');
+            } else {
+                $order_no = "";
+            }
+            $path = 'vr/file/' . $user_id .'/' . $string;
             $origin = config('app.url');
 
+            info("user_id: $user_id");
+            info("order_no: $order_no");
+
             $url = $origin . "/storage/" . $path . "/vtour/";
-            $download = $origin . "/storage/" . $path . "/" . $string . "jpeg";
+            $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
@@ -48,23 +61,25 @@ class UploadController extends Controller
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
             $inputPath = $preFix . $path;
             
-            $cmd = "sudo -Hu ansible echo y | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
+            $cmd = "sudo -Hu ansible echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
             exec($cmd, $output, $result);
-
+            
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
                 UploadImage::create([
-                        'user_id' => $user->id,
-                        'link' => "{$url}",
-                        'download' => "{$download}"
+                        'user_id' => $user_id,
+                        'link' => $url,
+                        'download' => $download,
+                        'order_no' => $order_no
                     ]
                 );
                 return $this->successJsonResponse([
                     'fileName' => $fileName,
                     'url' => $url,
-                    'download' => $download
+                    'download' => $download,
+                    'order_no' => $order_no
                 ]);
             }
          }
