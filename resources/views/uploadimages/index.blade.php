@@ -19,6 +19,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>订单号</th>
                             <th>链接</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -27,6 +28,7 @@
                     <tbody>
                         @foreach($images as $image)
                         <tr>
+                            <td>{{ $image->order_no }}</td>
                             <td><a href="{{ $image->link }}" target="_blank">{{ $image->link }}</a></td>
                             <td>{{ $image->created_at }}</td>
                             <td>
