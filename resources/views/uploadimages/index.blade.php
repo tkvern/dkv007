@@ -82,7 +82,8 @@
     var access_token;
     var qrcode;
     var count = 0;
-    $("#fileuploader").uploadFile({
+    var uploadobj = $("#fileuploader").uploadFile();
+    uploadobj.uploadFile({
         url: "/upload/store",
         fileName: "myfile",
         maxFileSize: 300*1024*1024,
@@ -91,6 +92,7 @@
         acceptFiles: "image/jpeg",
         showDelete: false,
         showPreview: false,
+        dragDrop: true,
         onSuccess:function(files,data,xhr,pd) {
             if (data.err_code == 0) {
                 $("#uploaddone").empty();
@@ -126,6 +128,22 @@
                 this.statusbar.addClass("odd"); 
             return this;
             
+        },
+        onSelect: function(files) {
+            var file = files[0];
+            var reader = new FileReader();
+            var ret = [];
+            reader.onload = function(theFile) {
+                var image = new Image();
+                image.src = theFile.target.result;
+                image.onload = function() {
+                    if (this.width/this.height != 2) {
+                        uploadobj.stopUpload();
+                        alert("全景图必须为 宽:高 = 2:1");
+                    }
+                };
+            }
+            reader.readAsDataURL(file);
         }
     });
 
