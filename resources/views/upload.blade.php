@@ -41,7 +41,8 @@
                     console.log(data.access_token);
                     access_token = data.access_token;
                     var count = 0;
-                    $("#fileuploader").uploadFile({
+                    var uploadobj = $("#fileuploader").uploadFile();
+                    uploadobj.uploadFile({
                         url: "/api/upload/file",
                         fileName: "myfile",
                         maxFileSize: 50*1024*1024,
@@ -102,6 +103,22 @@
                                 this.statusbar.addClass("odd"); 
                             return this;
                             
+                        },
+                        onSelect: function(files) {
+                            var file = files[0];
+                            var reader = new FileReader();
+                            var ret = [];
+                            reader.onload = function(theFile) {
+                                var image = new Image();
+                                image.src = theFile.target.result;
+                                image.onload = function() {
+                                    if (this.width/this.height != 2) {
+                                        uploadobj.stopUpload();
+                                        alert("全景图必须为 宽:高 = 2:1");
+                                    }
+                                };
+                            }
+                            reader.readAsDataURL(file);
                         }
                     });
                 } else {
