@@ -15,7 +15,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', '量子云') }}</title>
+    <title>{{ isset($title) ? $title . '-' : '' }}{{ config('app.name', '量子云') }}</title>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">

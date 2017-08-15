@@ -20,6 +20,6 @@ class ShareController extends BaseController
             $images = $images->where('public', 1)->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
         }
         $images = $images->where('public', 1)->orderBy('created_at', 'desc')->paginate(10);
-        return view('share', ['images' => $images, 'search' => $search]);
+        return view('share', ['images' => $images, 'search' => $search, 'title' => $search]);
     }
 }
