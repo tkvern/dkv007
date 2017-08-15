@@ -17,9 +17,9 @@ class ShareController extends BaseController
         $search = $request->query('search');
         $images = UploadImage::query();
         if(!empty($search)) {
-            $images = $images->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
+            $images = $images->where('public', 1)->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
         }
-        $images = $images->orderBy('created_at', 'desc')->where('public', '=', '1')->paginate(10);
+        $images = $images->where('public', 1)->orderBy('created_at', 'desc')->paginate(10);
         return view('share', ['images' => $images, 'search' => $search]);
     }
 }
