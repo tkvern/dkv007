@@ -52,7 +52,7 @@
                         showDelete: false,
                         showPreview: false,
                         headers: {
-                            "Authorization": "Bearer " + access_token
+                            "Authorization": "Bearer " + access_token,
                         },
                         deleteCallback: function (data, pd) {
                             var data = JSON.parse(data);

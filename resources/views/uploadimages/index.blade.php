@@ -19,26 +19,45 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>缩略图</th>
                             <th>订单号</th>
+                            <th>标题</th>
                             <th>链接</th>
                             <th>创建时间</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($images as $image)
                         <tr>
+                            <td><img src="{{ $image->link }}panos/{{ $image->key }}.tiles/thumb.jpg" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
                             <td>{{ $image->order_no }}</td>
+                            <td>{{ $image->title }}</td>
                             <td><a href="{{ $image->link }}" target="_blank">{{ $image->link }}</a></td>
                             <td>{{ $image->created_at }}</td>
                             <td>
+                                @if (empty($image->title))
+                                    <span class="label label-warning">未设置属性</span>&nbsp;&nbsp;&nbsp;
+                                @endif
+
+                                @if ($image->public == 0)
+                                    <span class="label label-info">未共享</span>&nbsp;&nbsp;&nbsp;
+                                @else
+                                    <span class="label label-success">已共享</span>&nbsp;&nbsp;&nbsp;
+                                @endif
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="{{ $image->path() . '/edit' }}">
+                                    修改属性
+                                </a>&nbsp;&nbsp;&nbsp;
                                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ $image->link }}')">
                                     查看二维码
-                                </button>
+                                </button>&nbsp;&nbsp;&nbsp;
                                 @if (!empty($image->download))
                                 <a class="btn btn-primary btn-xs" target="_blank" download href="{{ $image->download }}">
                                     下载图片
-                                </a>
+                                </a>&nbsp;&nbsp;&nbsp;
                                 @endif
                             </td>
                         </tr>
@@ -98,7 +117,7 @@
                 $("#uploaddone").empty();
                 $("#uploaddone").append("<p style='color:red; font-size: 24px;'>已上传成功!正在重新加载列表...<p/>");
                 setTimeout(function(){
-                    window.location.reload();
+                    //window.location.reload();
                 }, 2800);
             } else {
                 alert(data.err_msg);

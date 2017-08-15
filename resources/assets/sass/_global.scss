@@ -62,6 +62,10 @@
     min-width: 80px;
 }
 
+.panel-body {
+    overflow-x: scroll;
+}
+
 @media (max-width: 767px) {
     .navbar-top-links .dropdown-user {
         left: 0px!important;

@@ -42,8 +42,11 @@ Route::get('/user/password', 'UserController@password');
 Route::post('/user/password', 'UserController@change_password');
 
 Route::get('/upload/index', 'UploadImageController@index');
+Route::get('/upload/{upload}/edit', 'UploadImageController@edit');
+Route::post('/upload/{upload}', 'UploadImageController@update');
 Route::post('/upload/store', 'UploadImageController@store');
 
+Route::get('/share', 'ShareController@index');
 
 Route::get('/upload', function() {
   return view('upload');

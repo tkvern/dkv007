@@ -24,23 +24,34 @@ class UploadImageController extends Controller
         return view('uploadimages.create');
     }
 
+    public function edit($id) {
+        return view('uploadimages.edit', ['image' => UploadImage::find($id)]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $image = UploadImage::find($id);
+        $image->update($request->only(['title', 'description', 'public']));
+        return redirect()->action('UploadImageController@index');
+    }
+
     public function store(Request $request)
     {
         // $output_dir = storage_path()."/app/public/vr/file/";
         if(isset($_FILES["myfile"]))
         {
             $ret = array();
-            $string = str_random(10);
+            $key = str_random(10);
             $user = $request->user();
-            $path = 'vr/file/' . $user->id .'/' . $string;
+            $path = 'vr/file/' . $user->id .'/' . $key;
             $origin = config('app.url');
 
             $url = $origin . "/storage/" . $path . "/vtour/";
-            $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
+            $download = $origin . "/storage/" . $path . "/" . $key . ".jpeg";
 
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
-                $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
+                $fileName = $request->file('myfile')->storeAs($path, $key . '.jpeg','public');
             }
             else  //Multiple files, file[]
             {
@@ -57,21 +68,25 @@ class UploadImageController extends Controller
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
-            exec($cmd, $output, $result);
-            
+            // exec($cmd, $output, $result);
+            $result = 0;
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
                 UploadImage::create([
                         'user_id' => $user->id,
-                        'link' => "{$url}",
-                        'download' => "{$download}"
+                        'link' => $url,
+                        'download' => $download,
+                        'key' => $key,
+                        'path' => $path
                     ]
                 );
                 return $this->successJsonResponse([
                     'fileName' => $fileName,
                     'url' => $url,
-                    'download' => "{$download}"
+                    'download' => $download,
+                    'key' => $key,
+                    'path' => $path
                 ]);
             }
          }

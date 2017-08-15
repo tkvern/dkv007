@@ -72,14 +72,18 @@ class UploadController extends Controller
                         'user_id' => $user_id,
                         'link' => $url,
                         'download' => $download,
-                        'order_no' => $order_no
+                        'order_no' => $order_no,
+                        'key' => $string,
+                        'path' => $path
                     ]
                 );
                 return $this->successJsonResponse([
                     'fileName' => $fileName,
                     'url' => $url,
                     'download' => $download,
-                    'order_no' => $order_no
+                    'order_no' => $order_no,
+                    'key' => $string,
+                    'path' => $path
                 ]);
             }
          }
