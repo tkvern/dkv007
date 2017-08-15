@@ -37,7 +37,6 @@ class UploadImageController extends Controller
 
     public function store(Request $request)
     {
-        // $output_dir = storage_path()."/app/public/vr/file/";
         if(isset($_FILES["myfile"]))
         {
             $ret = array();
@@ -49,11 +48,11 @@ class UploadImageController extends Controller
             $url = $origin . "/storage/" . $path . "/vtour/";
             $download = $origin . "/storage/" . $path . "/" . $key . ".jpeg";
 
-            if(!is_array($_FILES["myfile"]["name"])) //single file
+            if(!is_array($_FILES["myfile"]["name"]))
             {
                 $fileName = $request->file('myfile')->storeAs($path, $key . '.jpeg','public');
             }
-            else  //Multiple files, file[]
+            else
             {
             //   $allFiles = $request->allFiles();
             //   foreach($allFiles as $file) {
@@ -68,8 +67,9 @@ class UploadImageController extends Controller
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
-            exec($cmd, $output, $result);
-
+            // exec($cmd, $output, $result);
+            $result = 0;
+            
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
@@ -89,6 +89,8 @@ class UploadImageController extends Controller
                     'path' => $path
                 ]);
             }
-         }
+        } else {
+            return $this->errorJsonResponse(400, 'An unknown error occurred');
+        }
     }
 }

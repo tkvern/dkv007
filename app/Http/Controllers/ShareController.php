@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UploadImage;
+use Illuminate\Routing\Controller as BaseController;
 
-class ShareController extends Controller
+class ShareController extends BaseController
 {
     public function __construct()
     {

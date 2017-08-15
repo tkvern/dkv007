@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-5 col-md-6 col-sm-10 col-xs-12">
             <br /><br />
-                <form class="form-horizontal" role="form" method="POST" action="{{ $image->path() }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ $image->path() }}/update">
                     {{ csrf_field() }}
                     <fieldset>
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

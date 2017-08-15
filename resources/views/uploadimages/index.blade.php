@@ -11,7 +11,7 @@
                 <li>全景图必须为 宽:高 = 2:1</li>
             </ol>
             <form method="post" action="{{ url('/upload/store')}}">
-                {{ csrf_field() }}
+                {{--  {{ csrf_field() }}  --}}
                 <div id="fileuploader">Upload</div>
                 <div id="uploaddone"></div>
             </form>
@@ -117,7 +117,7 @@
                 $("#uploaddone").empty();
                 $("#uploaddone").append("<p style='color:red; font-size: 24px;'>已上传成功!正在重新加载列表...<p/>");
                 setTimeout(function(){
-                    //window.location.reload();
+                    window.location.reload();
                 }, 2800);
             } else {
                 alert(data.err_msg);
