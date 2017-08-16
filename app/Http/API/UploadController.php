@@ -23,15 +23,17 @@ class UploadController extends Controller
 
         if(isset($_FILES["myfile"]))
         {
+            info("request: {$request->header('User-Id')}");
+            info("request: {$request->header('Order-No')}");
             $string = str_random(10);
-            if (!empty($request->header('user_id'))) {
-                $user_id = $request->header('user_id');
+            if (!empty($request->header('User-Id'))) {
+                $user_id = $request->header('User-Id');
             } else {
                 $user_id = $request->user()->id;
             }
 
-            if (!empty($request->header('order_no'))) {
-                $order_no = $request->header('order_no');
+            if (!empty($request->header('Order-No'))) {
+                $order_no = $request->header('Order-No');
             } else {
                 $order_no = "";
             }
