@@ -52,9 +52,7 @@
                         showDelete: false,
                         showPreview: false,
                         headers: {
-                            "Authorization": "Bearer " + access_token,
-                            "user_id": "1009",
-                            "order_no": "YH17081610101858"
+                            "Authorization": "Bearer " + access_token
                         },
                         deleteCallback: function (data, pd) {
                             var data = JSON.parse(data);
