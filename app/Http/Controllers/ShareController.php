@@ -44,6 +44,6 @@ class ShareController extends BaseController
     public function activity_xml($activity_no) {
         // $images = UploadImage::orderBy('number');
         $images = DB::table('upload_images')->where('activity_no', $activity_no)->where('public', 1)->orderby('number')->get();
-        return response()->view('share.actxml', compact('images'))->header('Content-Type', 'text/xml');
+        return response()->view('share.actxml', compact('images'))->header('Content-Type', 'text/xml')->header('Cache-Control','no-cache, public');
     }
 }

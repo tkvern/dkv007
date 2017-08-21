@@ -1,5 +1,3 @@
-<?php echo '<?xml version="1.0" encoding="UTF-8">'; ?>
-<!-- krpnao -->
 <krpano version="1.19" title="量子云">
 
 	<include url="/vrplay/skin/vtourskin.xml" />
