@@ -26,7 +26,7 @@
                             <td>{{ $activity->title }}</td>
                             <td>{{ $activity->activity_no }}</td>
                             <td>{{ $activity->click }}</td>
-                            <td><a href="{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}" target="_blank">{{ config('app.url') }}/share/activities/{{ $activity->activity_no }}</a></td>
+                            <td><a href="{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}" target="_blank">{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}</a></td>
                             <td>{{ $activity->created_at }}</td>
                             <td>
                                 @if (empty($activity->title))
