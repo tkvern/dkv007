@@ -7,6 +7,7 @@
             <br /><br />
                 <form class="form-horizontal" role="form" method="POST" action="{{ $image->path() }}/update">
                     {{ csrf_field() }}
+                    <input type="hidden" name="activity_no" value="{{$image->activity_no}}">
                     <fieldset>
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 col-sm-4 control-label text-right">标题</label>
@@ -41,6 +42,50 @@
                                         <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('number') ? ' has-error' : '' }}">
+                            <label for="number" class="col-md-4 col-sm-4 control-label text-right">序号</label>
+
+                            <div class="col-md-8 col-sm-8">
+                                <input 
+                                    id="number" 
+                                    type="number"
+                                    min="0"
+                                    class="form-control" 
+                                    name="number" 
+                                    value="{{ old('number', $image->number) }}"
+                                    autofocus>
+
+                                @if ($errors->has('title'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('number') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 col-sm-4 control-label text-right">图片尺寸(必选)</label>
+
+                            <div class="col-md-8 col-sm-8">
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio1" value="2"> [2048 × 1024] 
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="4" > [4096 × 2048]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="6" > [6144 × 3072]
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="8" > [8192 × 4096]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="10" > [10240 × 5120]
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="20" > [20480 × 10240]
+                                </label>
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

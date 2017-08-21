@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <krpano version="1.19" title="量子云">
 
-	<include url="skin/vtourskin.xml" />
+	<include url="/vrplay/skin/vtourskin.xml" />
 
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
@@ -73,27 +74,25 @@
 		if(startactions !== null, startactions() );
 	</action>
 
+	@foreach($images as $image)
+		<scene name="scene_{{$image->key}}" title="{{$image->title}}" onstart="" thumburl="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/thumb.jpg" lat="" lng="" heading="">
 
-	
-	<scene name="scene_{{$image->key}}" title="{{$image->title}}" onstart="" thumburl="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/thumb.jpg" lat="" lng="" heading="">
+			<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+			<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/preview.jpg" />
 
-		<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/preview.jpg" />
+			<image type="CUBE" multires="true" tilesize="512">
+				<level tiledimagewidth="2624" tiledimageheight="2624">
+					<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+				</level>
+				<level tiledimagewidth="1280" tiledimageheight="1280">
+					<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+				</level>
+				<level tiledimagewidth="640" tiledimageheight="640">
+					<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+				</level>
+			</image>
 
-		<image type="CUBE" multires="true" tilesize="512">
-			<level tiledimagewidth="2624" tiledimageheight="2624">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
-			</level>
-			<level tiledimagewidth="1280" tiledimageheight="1280">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
-			</level>
-			<level tiledimagewidth="640" tiledimageheight="640">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
-			</level>
-		</image>
-
-	</scene>
-
-
+		</scene>
+	@endforeach
 </krpano>

@@ -31,14 +31,24 @@ class UploadImageController extends Controller
     public function update(Request $request, $id)
     {
         $image = UploadImage::find($id);
+        $activity_no = $request->input('activity_no');
         $image->update($request->only(['title', 'description', 'public']));
-        return redirect()->action('UploadImageController@index');
+        if (empty($activity_no)) {
+            return redirect()->action('UploadImageController@index');
+        } else {
+            return redirect("/activities/{$activity_no}/edit");
+        }
     }
 
     public function store(Request $request)
     {
         if(isset($_FILES["myfile"]))
         {
+            if (!empty($request->header('Activity-No'))) {
+                $activity_no = $request->header('Activity-No');
+            } else {
+                $activity_no = "";
+            }
             $ret = array();
             $key = str_random(10);
             $user = $request->user();
@@ -67,8 +77,8 @@ class UploadImageController extends Controller
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             info("exec: $cmd");
-            exec($cmd, $output, $result);
-            
+            // exec($cmd, $output, $result);
+            $result = 0;
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
@@ -77,7 +87,8 @@ class UploadImageController extends Controller
                         'link' => $url,
                         'download' => $download,
                         'key' => $key,
-                        'path' => $path
+                        'path' => $path,
+                        'activity_no' => $activity_no
                     ]
                 );
                 return $this->successJsonResponse([
@@ -85,7 +96,8 @@ class UploadImageController extends Controller
                     'url' => $url,
                     'download' => $download,
                     'key' => $key,
-                    'path' => $path
+                    'path' => $path,
+                    'activity_no' => $activity_no
                 ]);
             }
         } else {

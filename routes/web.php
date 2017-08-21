@@ -46,6 +46,16 @@ Route::get('/upload/{upload}/edit', 'UploadImageController@edit');
 Route::post('/upload/{upload}/update', 'UploadImageController@update');
 Route::post('/upload/store', 'UploadImageController@store');
 
+Route::get('/activities/index', 'ActivitiesController@index');
+Route::get('/activities/create', 'ActivitiesController@create');
+Route::get('/activities/{activity_no}/edit', 'ActivitiesController@edit');
+Route::post('/activities/store', 'ActivitiesController@store');
+Route::post('/activities/{activity_no}/update', 'ActivitiesController@update');
+
+
+Route::get('/share/activity/{activity_no}', 'ShareController@activity');
+Route::get('/share/xml/{activity_no}.xml', 'ShareController@activity_xml');
+
 Route::get('/share', 'ShareController@index');
 Route::get('/share/image/{key}', 'ShareController@show');
 Route::get('/vrplay/{key}.xml', 'ShareController@xml');
