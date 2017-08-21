@@ -2,7 +2,6 @@
 
 	<include url="skin/vtourskin.xml" />
 
-
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
 	               maps_type="google"
@@ -13,12 +12,12 @@
 	               webvr="true"
 	               webvr_gyro_keeplookingdirection="false"
 	               webvr_prev_next_hotspots="true"
-	               littleplanetintro="false"
-	               title="true"
+	               littleplanetintro="true"
+	               title="false"
 	               thumbs="true"
-	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
-	               thumbs_opened="false"
-	               thumbs_text="false"
+	               thumbs_width="60" thumbs_height="40" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="true"
+	               thumbs_text="true"
 	               thumbs_dragging="true"
 	               thumbs_onhoverscrolling="false"
 	               thumbs_scrollbuttons="false"
