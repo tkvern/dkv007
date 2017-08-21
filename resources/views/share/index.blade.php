@@ -45,7 +45,7 @@
                                     <td><a href="/share/image/{{ $image->key }}" target="_blank">/share/image/{{ $image->key }}</a></td>
                                     <td>{{ $image->created_at }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ $image->link }}')">
+                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('/share/image/{{ $image->key }}')">
                                             查看二维码
                                         </button>&nbsp;&nbsp;&nbsp;
                                         @if (!empty($image->download))
