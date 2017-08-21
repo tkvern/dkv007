@@ -26,7 +26,7 @@
                             <td>{{ $activity->title }}</td>
                             <td>{{ $activity->activity_no }}</td>
                             <td>{{ $activity->click }}</td>
-                            <td><a href="{{ config('app.url') }}/share/activities/{{ $activity->activity_no }}" target="_blank">{{ config('app.url') }}/share/activities/{{ $activity->activity_no }}</a></td>
+                            <td><a href="{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}" target="_blank">{{ config('app.url') }}/share/activities/{{ $activity->activity_no }}</a></td>
                             <td>{{ $activity->created_at }}</td>
                             <td>
                                 @if (empty($activity->title))
@@ -77,4 +77,28 @@
         @endsection
         @include('widgets.panel', array('header'=>true, 'as'=>'activities'))
     </div>
+@stop
+
+@section('script')
+    <script src="/js/qrcode.js"></script>
+    <script>
+    var qrcode;
+    var count = 0;
+
+
+    function showQRCode(url) {
+        $("#preview").empty();
+        $("#preview").append("<div id='qrcode'></div>");
+        qrcode = new QRCode("qrcode", {
+            text: url,
+            width: 200,
+            height: 200,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        $("#preview img")[0].style.margin = "0 auto";
+        $('#image_modal').modal('show');
+    }
+  </script>
 @stop
