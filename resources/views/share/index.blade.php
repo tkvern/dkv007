@@ -42,7 +42,7 @@
                                 <tr>
                                     <td><img src="{{ $image->link }}panos/{{ $image->key }}.tiles/thumb.jpg" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
                                     <td>{{ $image->title }}</td>
-                                    <td><a href="{{ $image->link }}" target="_blank">{{ $image->link }}</a></td>
+                                    <td><a href="/share/image/{{ $image->key }}" target="_blank">/share/image/{{ $image->key }}</a></td>
                                     <td>{{ $image->created_at }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ $image->link }}')">
