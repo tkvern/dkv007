@@ -76,15 +76,15 @@
 
 
 	
-	<scene name="scene_0YMypclsBZ" title="{{$image->title}}" onstart="" thumburl="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/0YMypclsBZ.tiles/thumb.jpg" lat="" lng="" heading="">
+	<scene name="scene_{{$image->key}}" title="{{$image->title}}" onstart="" thumburl="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
-		<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/0YMypclsBZ.tiles/preview.jpg" />
+		<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/preview.jpg" />
 
 		<image type="CUBE" multires="true" tilesize="512">
 			<level tiledimagewidth="640" tiledimageheight="640">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/0YMypclsBZ.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
 			</level>
 		</image>
 
