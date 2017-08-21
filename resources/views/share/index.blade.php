@@ -24,13 +24,13 @@
         </div>
         <div class="row" style="padding-top: 20px;">
             <div class="col-sm-10 col-sm-offset-1">
-                @section ('image_panel_title','全景H5列表')
-                @section ('image_panel_body')
+                @section ('activity_panel_title','全景H5列表')
+                @section ('activity_panel_body')
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>缩略图</th>
+                                    {{--  <th>缩略图</th>  --}}
                                     <th>标题</th>
                                     <th>链接</th>
                                     <th>创建时间</th>
@@ -38,18 +38,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($images as $image)
+                                @foreach($activities as $activity)
                                 <tr>
-                                    <td><img src="{{ $image->link }}panos/{{ $image->key }}.tiles/thumb.jpg" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
-                                    <td>{{ $image->title }}</td>
-                                    <td><a href="/share/image/{{ $image->key }}" target="_blank">/share/image/{{ $image->key }}</a></td>
-                                    <td>{{ $image->created_at }}</td>
+                                    {{--  <td><img src="{{ $activity->link }}panos/{{ $activity->key }}.tiles/thumb.jpg" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>  --}}
+                                    <td>{{ $activity->title }}</td>
+                                    <td><a href="{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}" target="_blank">{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}</a></td>
+                                    <td>{{ $activity->created_at }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('/share/image/{{ $image->key }}')">
+                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}')">
                                             查看二维码
                                         </button>&nbsp;&nbsp;&nbsp;
-                                        @if (!empty($image->download))
-                                        <a class="btn btn-primary btn-xs" target="_blank" download href="{{ $image->download }}">
+                                        @if (!empty($activity->download))
+                                        <a class="btn btn-primary btn-xs" target="_blank" download href="{{ $activity->download }}">
                                             下载图片
                                         </a>&nbsp;&nbsp;&nbsp;
                                         @endif
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="pull-right">
-                        {{ $images->links() }}
+                        {{ $activities->links() }}
                     </div>
 
                     <div class="modal fade" tabindex="-1" role="dialog"  id="image_modal">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 @endsection
-                @include('widgets.panel', array('header'=>true, 'as'=>'image'))
+                @include('widgets.panel', array('header'=>true, 'as'=>'activity'))
             </div>
         </div>
     </div>

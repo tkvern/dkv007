@@ -17,12 +17,12 @@ class ShareController extends BaseController
     
     public function index(Request $request) {
         $search = $request->query('search');
-        $images = UploadImage::query();
+        $activities = Activity::query();
         if(!empty($search)) {
-            $images = $images->where('public', 1)->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
+            $activities = $activities->where('public', 1)->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
         }
-        $images = $images->where('public', 1)->orderBy('created_at', 'desc')->paginate(10);
-        return view('share.index', ['images' => $images, 'search' => $search, 'title' => $search]);
+        $activities = $activities->where('public', 1)->orderBy('created_at', 'desc')->paginate(10);
+        return view('share.index', ['activities' => $activities, 'search' => $search]);
     }
 
     public function show($key) {
