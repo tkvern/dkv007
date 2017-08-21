@@ -43,7 +43,7 @@
                                 <a class="btn btn-primary btn-xs" href="{{ $activity->path() . '/edit' }}">
                                     配置活动
                                 </a>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ config('app.url') }}/share/activities/{{ $activity->activity_no }}')">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ config('app.url') }}/share/activity/{{ $activity->activity_no }}')">
                                     查看二维码
                                 </button>&nbsp;&nbsp;&nbsp;
                             </td>
