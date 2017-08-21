@@ -1,4 +1,4 @@
-<krpano version="1.19" title="量子云">
+<krpano version="1.19" title="量子视觉云">
 
 	<include url="skin/vtourskin.xml" />
 
