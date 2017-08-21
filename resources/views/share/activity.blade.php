@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{ !empty($title) ? $title . '-' : '' }}{{ config('app.name', '量子云') }}</title>
+	<title>{{ !empty($title) ? $title . '-' : '' }}{{ config('app.name', '量子视觉云') }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+	<meta name="description" content="{{$activity->description}}" />
 	<style>
 		@-ms-viewport { width:device-width; }
 		@media only screen and (min-device-width:800px) { html { overflow:hidden; } }
