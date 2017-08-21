@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 col-sm-4 control-label text-right">共享</label>
+                            <label for="title" class="col-md-4 col-sm-4 control-label text-right">开启</label>
 
                             <div class="col-md-8 col-sm-8">
 

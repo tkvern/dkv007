@@ -47,9 +47,9 @@
                         <li>
                             <a href="{{ url ('tasks') }}" {{ (Request::is('tasks/*') ? 'class=active' : '') }}><i class="fa fa-tasks fa-fw"></i> 作业</a>
                         </li>
-                        <li>
+                        {{--  <li>
                             <a href="{{ url ('upload/index') }}" {{ (Request::is('upload/*') ? 'class=active' : '') }}><i class="fa fa-image fa-fw"></i> 全景H5</a>
-                        </li>
+                        </li>  --}}
                         <li>
                             <a href="{{ url ('activities/index') }}" {{ (Request::is('activities/*') ? 'class=active' : '') }}><i class="fa fa-clone fa-fw"></i> 全景活动</a>
                         </li>
