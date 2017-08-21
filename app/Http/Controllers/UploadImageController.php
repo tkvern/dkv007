@@ -32,7 +32,7 @@ class UploadImageController extends Controller
     {
         $image = UploadImage::find($id);
         $activity_no = $request->input('activity_no');
-        $image->update($request->only(['title', 'description', 'public']));
+        $image->update($request->only(['title', 'description', 'public', 'number']));
         if (empty($activity_no)) {
             return redirect()->action('UploadImageController@index');
         } else {
