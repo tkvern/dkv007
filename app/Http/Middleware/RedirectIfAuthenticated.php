@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
 
-            if ($request->is('/share/*')){
+            if ($request->is('share') || $request->is('share/*') || $request->is('vrplay/*')){
                 return $next($request);
             }
             return redirect('/home');
