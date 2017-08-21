@@ -47,6 +47,8 @@ Route::post('/upload/{upload}/update', 'UploadImageController@update');
 Route::post('/upload/store', 'UploadImageController@store');
 
 Route::get('/share', 'ShareController@index');
+Route::get('/share/image/{key}', 'ShareController@show');
+Route::get('/vrplay/{key}.xml', 'ShareController@xml');
 
 Route::get('/upload', function() {
   return view('upload');

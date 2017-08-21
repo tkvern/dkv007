@@ -20,6 +20,16 @@ class ShareController extends BaseController
             $images = $images->where('public', 1)->where('title', 'like', "%{$search}%")->orwhere('user_id', '=', "{$search}");
         }
         $images = $images->where('public', 1)->orderBy('created_at', 'desc')->paginate(10);
-        return view('share', ['images' => $images, 'search' => $search, 'title' => $search]);
+        return view('share.index', ['images' => $images, 'search' => $search, 'title' => $search]);
+    }
+
+    public function show($key) {
+        $image = UploadImage::where('key', $key)->first();
+        return view('share.show', ['image' => $image, 'title' => $image->title]);
+    }
+
+    public function xml($key) {
+        $image = UploadImage::where('key', $key)->first();
+        return response()->view('share.tour', ['image' => $image])->header('Content-Type', 'text/xml');;
     }
 }
