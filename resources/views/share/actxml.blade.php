@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?php echo '<?xml version="1.0" encoding="UTF-8">'; ?>
 <krpano version="1.19" title="量子云">
 
 	<include url="/vrplay/skin/vtourskin.xml" />
