@@ -38,6 +38,7 @@ class ShareController extends BaseController
 
     public function activity($activity_no) {
         $activity = Activity::where('activity_no', $activity_no)->first();
+        $activity->where('activity_no', $activity_no)->increment('click');
         return view('share.activity', ['activity' => $activity, 'title' => $activity->title]);
     }
 

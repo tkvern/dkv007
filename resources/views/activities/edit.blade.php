@@ -9,7 +9,7 @@
                     <p class="text-danger">&nbsp;&nbsp;&nbsp;&nbsp;请注意！</p>
                     <ol class="text-muted">
                         <li>使用专线上传，以保证服务质量。</li>
-                        <li>全景H5链接生成当月有效，次月失效。</li>
+                        <li style="color: #a94442;">全景H5链接生成当月有效，次月失效。</li>
                         <li>全景图必须为 宽:高 = 2:1</li>
                         <li>全景图仅支持以下分辨率
                             <ul>

@@ -15,7 +15,7 @@ class UploadImageController extends Controller
     public function index(Request $request) {
         $user = $request->user();
         $start = date('Y-m-01 00:00:00');
-        $images = UploadImage::where('user_id', $user->id)->where('created_at', '>=', $start)->orderBy('created_at', 'desc')->paginate(10);
+        $images = UploadImage::where('user_id', $user->id)->where('created_at', '>=', $start)->orderBy('created_at', 'desc')->where('activity_no', '')->paginate(10);
         
         return view('uploadimages.index', ['images' => $images]);
     }

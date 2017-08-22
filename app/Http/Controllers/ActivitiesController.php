@@ -36,7 +36,6 @@ class ActivitiesController extends Controller
     public function update(Request $request, $activity_no)
     {
         $activity = Activity::where('activity_no', $activity_no)->first();
-        info("activity: {$activity}");
         $activity->where('activity_no', $activity_no)->update($request->only(['title', 'description', 'public']));
         return redirect()->back();
     }
