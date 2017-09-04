@@ -110,9 +110,6 @@ class UploadImageController extends Controller
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
-                $dirpath = "public/vr/file/{$user->id}/{$key}/vtour/panos/{$key}.tiles/b";
-                $directories = Storage::directories($dirpath);
-                $size_no = count($directories);
                 UploadImage::create([
                         'user_id' => $user->id,
                         'link' => $url,
