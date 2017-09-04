@@ -65,26 +65,38 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 col-sm-4 control-label text-right">图片尺寸(必选)</label>
+                            <label for="title" class="col-md-4 col-sm-4 control-label text-right">图片尺寸(识别错误时调整)</label>
 
                             <div class="col-md-8 col-sm-8">
                                 <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio1" value="2"> [2048 × 1024] 
-                                </label>
-                                <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio2" value="4" > [4096 × 2048]
+                                  <input type="radio" name="size_no" id="inlineRadio2" value="2"> [2048 × 1024] 
                                 </label><br>
                                 <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio2" value="6" > [6144 × 3072]
-                                </label>
-                                <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio2" value="8" > [8192 × 4096]
+                                  <input type="radio" name="size_no" id="inlineRadio4" value="4" > [4096 × 2048]
                                 </label><br>
                                 <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio2" value="10" > [10240 × 5120]
-                                </label>
+                                  <input type="radio" name="size_no" id="inlineRadio6" value="6" > [6144 × 3072]
+                                </label><br>
                                 <label class="radio-inline">
-                                  <input type="radio" name="size_no" id="inlineRadio2" value="20" > [20480 × 10240]
+                                  <input type="radio" name="size_no" id="inlineRadio8" value="8" > [8192 × 4096]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio10" value="10" > [10240 × 5120]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio12" value="12" > [12288 × 6144]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio14" value="14" > [14336 × 7168]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio16" value="16" > [16384 × 8192]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio18" value="18" > [18432 × 9216]
+                                </label><br>
+                                <label class="radio-inline">
+                                  <input type="radio" name="size_no" id="inlineRadio20" value="20" > [20480 × 10240]
                                 </label>
                             </div>
                         </div>
@@ -123,3 +135,9 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        $("#inlineRadio{{$image->size_no}}").attr('checked', true);
+    </script>
+@stop

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use League\Flysystem\Exception;
 use App\Models\UploadImage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UploadController extends Controller
 {
@@ -39,6 +40,7 @@ class UploadController extends Controller
             }
             $path = 'vr/file/' . $user_id .'/' . $string;
             $origin = config('app.url');
+            $size_no = 8;
 
             info("user_id: $user_id");
             info("order_no: $order_no");
@@ -49,6 +51,32 @@ class UploadController extends Controller
             if(!is_array($_FILES["myfile"]["name"])) //single file
             {
                 $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
+                $arr = Image::make($request->file('myfile'));
+                $width = $arr->width();
+                $height = $arr->height();
+                if ($width == 2048 && $height == 1024) {
+                    $size_no = 2;
+                } else if ($width == 4096 && $height == 2048) {
+                    $size_no = 4;
+                } else if ($width == 6144 && $height == 3072) {
+                    $size_no = 6;
+                } else if ($width == 8192 && $height == 4096) {
+                    $size_no = 8;
+                } else if ($width == 10240 && $height == 5120) {
+                    $size_no = 10;
+                } else if ($width == 12288 && $height == 6144) {
+                    $size_no = 12;
+                } else if ($width == 14336 && $height == 7168) {
+                    $size_no = 14;
+                } else if ($width == 16384 && $height == 8192) {
+                    $size_no = 16;
+                } else if ($width == 18432 && $height == 9216) {
+                    $size_no = 18;
+                } else if ($width == 20480 && $height == 10240) {
+                    $size_no = 20;
+                } else {
+                    $size_no = 8;
+                }
             }
             else  //Multiple files, file[]
             {
@@ -76,7 +104,8 @@ class UploadController extends Controller
                         'download' => $download,
                         'order_no' => $order_no,
                         'key' => $string,
-                        'path' => $path
+                        'path' => $path,
+                        'size_no' => $size_no
                     ]
                 );
                 return $this->successJsonResponse([
@@ -85,10 +114,13 @@ class UploadController extends Controller
                     'download' => $download,
                     'order_no' => $order_no,
                     'key' => $string,
-                    'path' => $path
+                    'path' => $path,
+                    'size_no' => $size_no
                 ]);
             }
-         }
+         } else {
+            return $this->errorJsonResponse(400, 'An unknown error occurred');
+        }
     }
 
     // public function deleteFile(Request $request)

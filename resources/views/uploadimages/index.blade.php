@@ -9,14 +9,10 @@
                 <li>使用专线上传，以保证服务质量。</li>
                 <li style="color: #a94442;">全景H5链接生成当月有效，次月失效。</li>
                 <li>全景图必须为 宽:高 = 2:1</li>
-                <li>全景图仅支持以下分辨率
+                <li>全景图仅支持以下标准分辨率自动识别
                     <ul>
-                        <li>2K&nbsp;&nbsp;&nbsp;[2048 × 1024]</li>
-                        <li>4K&nbsp;&nbsp;&nbsp;[4096 × 2048]</li>
-                        <li>6K&nbsp;&nbsp;&nbsp;[6144 × 3072]</li>
-                        <li>8K&nbsp;&nbsp;&nbsp;[8192 × 4096]</li>
-                        <li>10K[10240 × 5120]</li>
-                        <li>20K[20480 × 10240]</li>
+                        <li>2K  &nbsp;&nbsp;&nbsp;4K  &nbsp;&nbsp;8K  &nbsp;10K</li>
+                        <li>12K 14K 18K 20K</li>
                     <ul>
                 </li>
             </ol>
