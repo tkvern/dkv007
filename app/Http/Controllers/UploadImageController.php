@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use League\Flysystem\Exception;
 use App\Models\UploadImage;
 use App\Traits\JsonResponse;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UploadImageController extends Controller
 {
@@ -54,6 +55,7 @@ class UploadImageController extends Controller
             $user = $request->user();
             $path = 'vr/file/' . $user->id .'/' . $key;
             $origin = config('app.url');
+            $size_no = 8;
 
             $url = $origin . "/storage/" . $path . "/vtour/";
             $download = $origin . "/storage/" . $path . "/" . $key . ".jpeg";
@@ -61,6 +63,32 @@ class UploadImageController extends Controller
             if(!is_array($_FILES["myfile"]["name"]))
             {
                 $fileName = $request->file('myfile')->storeAs($path, $key . '.jpeg','public');
+                $arr = Image::make($request->file('myfile'));
+                $width = $arr->width();
+                $height = $arr->height();
+                if ($width == 2048 && $height == 1024) {
+                    $size_no = 2;
+                } else if ($width == 4096 && $height == 2048) {
+                    $size_no = 4;
+                } else if ($width == 6144 && $height == 3072) {
+                    $size_no = 6;
+                } else if ($width == 8192 && $height == 4096) {
+                    $size_no = 8;
+                } else if ($width == 10240 && $height == 5120) {
+                    $size_no = 10;
+                } else if ($width == 12288 && $height == 6144) {
+                    $size_no = 12;
+                } else if ($width == 14336 && $height == 7168) {
+                    $size_no = 14;
+                } else if ($width == 16384 && $height == 8192) {
+                    $size_no = 16;
+                } else if ($width == 18432 && $height == 9216) {
+                    $size_no = 18;
+                } else if ($width == 20480 && $height == 10240) {
+                    $size_no = 20;
+                } else {
+                    $size_no = 8;
+                }
             }
             else
             {
@@ -82,13 +110,17 @@ class UploadImageController extends Controller
             if($result !=0) {
                 return $this->errorJsonResponse(400, 'An unknown error occurred');
             } else {
+                $dirpath = "public/vr/file/{$user->id}/{$key}/vtour/panos/{$key}.tiles/b";
+                $directories = Storage::directories($dirpath);
+                $size_no = count($directories);
                 UploadImage::create([
                         'user_id' => $user->id,
                         'link' => $url,
                         'download' => $download,
                         'key' => $key,
                         'path' => $path,
-                        'activity_no' => $activity_no
+                        'activity_no' => $activity_no,
+                        'size_no' => $size_no
                     ]
                 );
                 return $this->successJsonResponse([
@@ -97,7 +129,8 @@ class UploadImageController extends Controller
                     'download' => $download,
                     'key' => $key,
                     'path' => $path,
-                    'activity_no' => $activity_no
+                    'activity_no' => $activity_no,
+                    'size_no' => $size_no
                 ]);
             }
         } else {
