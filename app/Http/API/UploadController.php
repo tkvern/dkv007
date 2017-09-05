@@ -9,6 +9,7 @@ use League\Flysystem\Exception;
 use App\Models\UploadImage;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Jobs\MakeVtourMultires;
+use Carbon\Carbon;
 
 class UploadController extends Controller
 {
@@ -93,7 +94,7 @@ class UploadController extends Controller
             $inputPath = $preFix . $path;
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
-            dispatch((new MakeVtourMultires($cmd))->onQueue('multires'));
+            dispatch((new MakeVtourMultires($cmd))->onQueue('multires')->delay(Carbon::now()->addMinutes(1)));
             UploadImage::create([
                     'user_id' => $user_id,
                     'link' => $url,
