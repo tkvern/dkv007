@@ -39,6 +39,6 @@ class MakeVtourMultires implements ShouldQueue
     public function failed(Exception $e)
     {
         // 发送失败通知, etc...
-        
+        info("job failt");
     }
 }

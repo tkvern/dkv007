@@ -45,7 +45,7 @@
                     uploadobj.uploadFile({
                         url: "/api/upload/file",
                         fileName: "myfile",
-                        maxFileSize: 50*1024*1024,
+                        maxFileSize: 100*1024*1024,
                         multiple: false,
                         maxFileCount: 1,
                         acceptFiles: "image/jpeg",
