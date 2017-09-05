@@ -57,7 +57,7 @@
                                 <a class="btn btn-primary btn-xs" href="{{ $image->path() . '/edit' }}">
                                     修改属性
                                 </a>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ $image->link }}')">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ config('app.url') }}/share/image/{{ $image->key }}')">
                                     查看二维码
                                 </button>&nbsp;&nbsp;&nbsp;
                                 @if (!empty($image->download))

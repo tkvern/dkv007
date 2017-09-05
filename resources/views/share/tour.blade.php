@@ -1,4 +1,4 @@
-<krpano version="1.19" title="量子视觉云">
+<krpano version="1.19" title="{{$image->title}}">
 
 	<include url="skin/vtourskin.xml" />
 
@@ -73,25 +73,113 @@
 		if(startactions !== null, startactions() );
 	</action>
 
-
-	
 	<scene name="scene_{{$image->key}}" title="{{$image->title}}" onstart="" thumburl="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/thumb.jpg" lat="" lng="" heading="">
 
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+			<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
-		<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/preview.jpg" />
+			<preview url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/preview.jpg" />
 
-		<image type="CUBE" multires="true" tilesize="512">
-			<level tiledimagewidth="2624" tiledimageheight="2624">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
-			</level>
-			<level tiledimagewidth="1280" tiledimageheight="1280">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
-			</level>
-			<level tiledimagewidth="640" tiledimageheight="640">
-				<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
-			</level>
-		</image>
+			<image type="CUBE" multires="true" tilesize="512">
+
+				@if ($image->size_no === 2)
+					<level tiledimagewidth="640" tiledimageheight="640">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 4)
+					<level tiledimagewidth="1280" tiledimageheight="1280">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="640" tiledimageheight="640">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 6)
+					<level tiledimagewidth="2048" tiledimageheight="2048">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1024" tiledimageheight="1024">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 8)
+					<level tiledimagewidth="2624" tiledimageheight="2624">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1280" tiledimageheight="1280">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="640" tiledimageheight="640">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 10)
+					<level tiledimagewidth="3200" tiledimageheight="3200">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1664" tiledimageheight="1664">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="768" tiledimageheight="768">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 12)
+					<level tiledimagewidth="3840" tiledimageheight="3840">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="2048" tiledimageheight="2048">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1024" tiledimageheight="1024">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 14)
+					<level tiledimagewidth="4608" tiledimageheight="4608">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%0v_%0h.jpg" />
+					</level>
+					<level tiledimagewidth="2304" tiledimageheight="2304">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%0v_%0h.jpg" />
+					</level>
+					<level tiledimagewidth="1152" tiledimageheight="1152">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%0v_%0h.jpg" />
+					</level>
+				@elseif ($image->size_no == 16)
+					<level tiledimagewidth="5184" tiledimageheight="5184">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l4/%v/l4_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="2624" tiledimageheight="2624">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1280" tiledimageheight="1280">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="640" tiledimageheight="640">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 18)
+					<level tiledimagewidth="5888" tiledimageheight="5888">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l4/%v/l4_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="2816" tiledimageheight="2816">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1536" tiledimageheight="1536">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="768" tiledimageheight="768">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@elseif ($image->size_no == 20)
+					<level tiledimagewidth="6400" tiledimageheight="6400">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l4/%v/l4_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="3200" tiledimageheight="3200">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l3/%v/l3_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="1664" tiledimageheight="1664">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+					</level>
+					<level tiledimagewidth="768" tiledimageheight="768">
+						<cube url="/storage/vr/file/{{$image->user_id}}/{{$image->key}}/vtour/panos/{{$image->key}}.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+					</level>
+				@endif
+			</image>
 
 	</scene>
 
