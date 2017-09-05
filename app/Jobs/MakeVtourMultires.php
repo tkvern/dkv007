@@ -18,7 +18,7 @@ class MakeVtourMultires implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(String $cmd)
+    public function __construct($cmd)
     {
         //
         $this->cmd = $cmd;
