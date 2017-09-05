@@ -8,6 +8,7 @@ use App\Http\Requests;
 use League\Flysystem\Exception;
 use App\Models\UploadImage;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Jobs\MakeVtourMultires;
 
 class UploadController extends Controller
 {
@@ -92,34 +93,28 @@ class UploadController extends Controller
             $inputPath = $preFix . $path;
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
-            info("exec: $cmd");
-            exec($cmd, $output, $result);
-
-            if($result !=0) {
-                return $this->errorJsonResponse(400, 'An unknown error occurred');
-            } else {
-                UploadImage::create([
-                        'user_id' => $user_id,
-                        'link' => $url,
-                        'download' => $download,
-                        'order_no' => $order_no,
-                        'key' => $string,
-                        'path' => $path,
-                        'size_no' => $size_no
-                    ]
-                );
-                return $this->successJsonResponse([
-                    'fileName' => $fileName,
-                    'url' => $url,
+            dispatch((new MakeVtourMultires($cmd))->onQueue('multires'));
+            UploadImage::create([
+                    'user_id' => $user_id,
+                    'link' => $url,
                     'download' => $download,
                     'order_no' => $order_no,
                     'key' => $string,
                     'path' => $path,
                     'size_no' => $size_no
-                ]);
-            }
+                ]
+            );
+            return $this->successJsonResponse([
+                'fileName' => $fileName,
+                'url' => $url,
+                'download' => $download,
+                'order_no' => $order_no,
+                'key' => $string,
+                'path' => $path,
+                'size_no' => $size_no
+            ]);
          } else {
-            return $this->errorJsonResponse(400, 'An unknown error occurred');
+            return $this->errorJsonResponse(400, 'An unknown error occurred， You must check your requrest!');
         }
     }
 
