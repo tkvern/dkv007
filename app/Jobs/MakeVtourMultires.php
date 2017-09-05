@@ -32,7 +32,7 @@ class MakeVtourMultires implements ShouldQueue
     public function handle()
     {
         info("job exec: {$this->cmd}");
-        exec($cmd, $output, $result);
+        exec($this->$cmd, $output, $result);
         info("job status: $result");
     }
 }
