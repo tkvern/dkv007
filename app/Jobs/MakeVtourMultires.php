@@ -7,7 +7,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Jobs\Exception;
 
 class MakeVtourMultires implements ShouldQueue
 {
@@ -35,11 +34,5 @@ class MakeVtourMultires implements ShouldQueue
         info("job exec: {$this->cmd}");
         exec($cmd, $output, $result);
         info("job status: $result");
-    }
-
-    public function failed(Exception $e)
-    {
-        // 发送失败通知, etc...
-        info("job failt");
     }
 }
