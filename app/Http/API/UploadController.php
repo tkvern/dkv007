@@ -94,7 +94,7 @@ class UploadController extends Controller
             $inputPath = $preFix . $path;
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
-            dispatch((new MakeVtourMultires($cmd)));
+            dispatch(new MakeVtourMultires($cmd));
             UploadImage::create([
                     'user_id' => $user_id,
                     'link' => $url,
