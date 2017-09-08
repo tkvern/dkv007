@@ -15,10 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    //    public function __construct()
+    //    {
+    //        $this->middleware('auth');
+    //    }
 
     /**
      * Show the application dashboard.
@@ -51,18 +51,20 @@ class HomeController extends Controller
         return view('home', compact('user', 'orderStat', 'taskStat'));
     }
 
-    public function jwt(Request $request) {
-//        $factory = JWTFactory::sub('user activate');
-//        $factory->setTTL(120);
-//        $payload = $factory->make();
+    public function jwt(Request $request)
+    {
+        //        $factory = JWTFactory::sub('user activate');
+        //        $factory->setTTL(120);
+        //        $payload = $factory->make();
         // $exp = $payload->getClaims()['exp'];
         // $exp->setValue(time() + 7200);
-//        $manager = app('tymon.jwt.manager');
-//        $token = $manager->encode($payload)->get();
+        //        $manager = app('tymon.jwt.manager');
+        //        $token = $manager->encode($payload)->get();
         return response()->json(['token' => $request->user()->getActivateToken()]);
     }
 
-    public function decode_jwt($token) {
+    public function decode_jwt($token)
+    {
         $manager = app('tymon.jwt.manager');
         $payload = $manager->decode(new Token($token))->get();
         return response()->json($payload);
