@@ -125,10 +125,10 @@
                     <tbody>
                         @foreach($images as $image)
                         <tr>
-                            <td><img src="{{ '/storage/' .  $image->link }}" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
+                            <td><img src="{{ config('app.aliyun_oss') . $image->link }}" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
                             <td>{{ $image->title }}</td>
                             <td>{{ $image->number }}</td>
-                            <td><a href="/storage/{{ $image->link }}" target="_blank">/storage/{{ $image->link }}</a></td>
+                            <td><a href="{{  config('app.aliyun_oss') . $image->link }}" target="_blank">{{ config('app.aliyun_oss') . $image->link }}</a></td>
                             <td>{{ $image->created_at }}</td>
                             <td>
                                 @if (empty($image->title))
@@ -145,7 +145,7 @@
                                 <a class="btn btn-primary btn-xs" href="{{ $image->path() . '/edit' }}">
                                     修改属性
                                 </a>&nbsp;&nbsp;&nbsp;
-                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('/storage/{{ $image->link }}')">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showQRCode('{{ config('app.aliyun_oss') . $image->link }}')">
                                     查看二维码
                                 </button>&nbsp;&nbsp;&nbsp;
                                 @if (!empty($image->download))

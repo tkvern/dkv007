@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'aliyun_oss' => env('ALIYUN_OSS', 'http://visiondk.oss-cn-shenzhen.aliyuncs.com/'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -170,6 +172,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Jacobcyl\AliOSS\AliOssServiceProvider::class,
 
         /*
          * Application Service Providers...

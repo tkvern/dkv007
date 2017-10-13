@@ -17,8 +17,8 @@
 <!-- The container for the list of example images -->
 <div id="links" class="links">
     @foreach($images as $image)
-        <a href="{{ '/storage/' .  $image->link }}" title="{{ $image->title }}" data-gallery="">
-            <img src="{{ '/storage/' .  $image->link }}" width="75" height="75">
+        <a href="http://visiondk.oss-cn-shenzhen.aliyuncs.com/{{ $image->link }}" title="{{ $image->title }}" data-gallery="">
+            <img src="http://visiondk.oss-cn-shenzhen.aliyuncs.com/{{ $image->link }}?x-oss-process=style/360x270">
         </a>
     @endforeach
 </div>

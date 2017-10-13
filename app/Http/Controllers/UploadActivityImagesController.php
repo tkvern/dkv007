@@ -62,7 +62,7 @@ class UploadActivityImagesController extends Controller
             $url = $path . "/" . $key . '.jpeg';
 
             if (!is_array($_FILES["myfile"]["name"])) {
-                $fileName = $request->file('myfile')->storeAs($path, $key . '.jpeg', 'public');
+                $fileName = $request->file('myfile')->storeAs($path, $key . '.jpeg', 'oss');
                 UploadActivityImage::create(
                     [
                         'user_id' => $user->id,

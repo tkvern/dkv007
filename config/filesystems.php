@@ -63,6 +63,16 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'oss' => [
+            'driver'        => 'oss',
+            'access_id'     => 'LTAIi33cLm5B7mPT',
+            'access_key'    => '0JalDJxaxxPvopbh5CAdG3Uqm8IQHs',
+            'bucket'        => 'test-visiondk',
+            'endpoint'      => 'oss-cn-shenzhen.aliyuncs.com',
+            'isCName'       => false,
+            'debug'         => true,
+        ],
+
     ],
 
 ];
