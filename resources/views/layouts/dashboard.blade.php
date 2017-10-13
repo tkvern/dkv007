@@ -53,6 +53,10 @@
                         <li>
                             <a href="{{ url ('activities/index') }}" {{ (Request::is('activities/*') ? 'class=active' : '') }}><i class="fa fa-clone fa-fw"></i> 全景活动</a>
                         </li>
+
+                        <li>
+                            <a href="{{ url ('activity_images/index') }}" {{ (Request::is('activity_images/*') ? 'class=active' : '') }}><i class="fa fa-image fa-fw"></i> 图片活动</a>
+                        </li>
                         
                         <li>
                             <a href="#"><i class="fa fa-cog fa-fw"></i> 账户设置<span class="fa arrow"></span></a>

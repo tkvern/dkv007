@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UploadImage;
 use App\Models\Activity;
+use App\Models\UploadActivityImage;
+use App\Models\ActivityImage;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +46,19 @@ class ShareController extends BaseController
         $activity = Activity::where('activity_no', $activity_no)->first();
         $activity->where('activity_no', $activity_no)->increment('click');
         return view('share.activity', ['activity' => $activity, 'title' => $activity->title]);
+    }
+
+
+    public function activity_image($activity_no)
+    {
+        $activity = ActivityImage::where('activity_no', $activity_no)->first();
+        $activity->where('activity_no', $activity_no)->increment('click');
+        $images = UploadActivityImage::where('public', 1)
+                                    ->where('activity_no', $activity_no)
+                                    ->orderBy('created_at', 'desc')
+                                    ->orderby('number')
+                                    ->get();
+        return view('share.activity_image', ['activity' => $activity, 'images' => $images, 'title' => $activity->title]);
     }
 
     public function activity_xml($activity_no)
