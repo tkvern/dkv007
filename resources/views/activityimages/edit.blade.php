@@ -125,7 +125,7 @@
                     <tbody>
                         @foreach($images as $image)
                         <tr>
-                            <td><img src="{{ config('app.aliyun_oss') . $image->link }}" alt="thumb.jpg" height="120" width="120" class="img-thumbnail"></td>
+                            <td><img src="{{ config('app.aliyun_oss') . $image->link }}?x-oss-process=style/360x270" alt="thumb.jpg" height="120" width="90" class="img-thumbnail"></td>
                             <td>{{ $image->title }}</td>
                             <td>{{ $image->number }}</td>
                             <td><a href="{{  config('app.aliyun_oss') . $image->link }}" target="_blank">{{ config('app.aliyun_oss') . $image->link }}</a></td>
