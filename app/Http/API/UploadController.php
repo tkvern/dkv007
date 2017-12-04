@@ -24,11 +24,17 @@ class UploadController extends Controller
     {
         // $output_dir = storage_path()."/app/public/vr/file/";
 
-        if(isset($_FILES["myfile"]))
-        {
+        if (isset($_FILES["myfile"])) {
             info("request: {$request->header('User-Id')}");
             info("request: {$request->header('Order-No')}");
-            $string = str_random(10);
+            info("request: {$request->header('File-Key')}");
+
+            if (!empty($request->header('File-Key'))) {
+                $string = $request->header('File-Key');
+            } else {
+                $string = str_random(10);
+            }
+
             if (!empty($request->header('User-Id'))) {
                 $user_id = $request->header('User-Id');
             } else {
@@ -50,43 +56,40 @@ class UploadController extends Controller
             $url = $origin . "/storage/" . $path . "/vtour/";
             $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
 
-            if(!is_array($_FILES["myfile"]["name"])) //single file
-            {
-                $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg','public');
+            if (!is_array($_FILES["myfile"]["name"])) { //single file
+                $fileName = $request->file('myfile')->storeAs($path, $string . '.jpeg', 'public');
                 $arr = Image::make($request->file('myfile'));
                 $width = $arr->width();
                 $height = $arr->height();
                 if ($width == 2048 && $height == 1024) {
                     $size_no = 2;
-                } else if ($width == 4096 && $height == 2048) {
+                } elseif ($width == 4096 && $height == 2048) {
                     $size_no = 4;
-                } else if ($width == 6144 && $height == 3072) {
+                } elseif ($width == 6144 && $height == 3072) {
                     $size_no = 6;
-                } else if ($width == 8192 && $height == 4096) {
+                } elseif ($width == 8192 && $height == 4096) {
                     $size_no = 8;
-                } else if ($width == 10240 && $height == 5120) {
+                } elseif ($width == 10240 && $height == 5120) {
                     $size_no = 10;
-                } else if ($width == 12288 && $height == 6144) {
+                } elseif ($width == 12288 && $height == 6144) {
                     $size_no = 12;
-                } else if ($width == 14336 && $height == 7168) {
+                } elseif ($width == 14336 && $height == 7168) {
                     $size_no = 14;
-                } else if ($width == 16384 && $height == 8192) {
+                } elseif ($width == 16384 && $height == 8192) {
                     $size_no = 16;
-                } else if ($width == 18432 && $height == 9216) {
+                } elseif ($width == 18432 && $height == 9216) {
                     $size_no = 18;
-                } else if ($width == 20480 && $height == 10240) {
+                } elseif ($width == 20480 && $height == 10240) {
                     $size_no = 20;
                 } else {
                     $size_no = 8;
                 }
-            }
-            else  //Multiple files, file[]
-            {
-            //   $allFiles = $request->allFiles();
-            //   foreach($allFiles as $file) {
-            //     $fileName = $request->file('myfile')->store($path, 'public');
-            //     $ret[]= ["fileName" => $fileName, "path" => $path ];
-            //   }
+            } else {  //Multiple files, file[]
+                //   $allFiles = $request->allFiles();
+                //   foreach($allFiles as $file) {
+                //     $fileName = $request->file('myfile')->store($path, 'public');
+                //     $ret[]= ["fileName" => $fileName, "path" => $path ];
+                //   }
                 return $this->errorJsonResponse(400, 'dos not support Multiple files');
             }
 
@@ -95,7 +98,8 @@ class UploadController extends Controller
             
             $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
             dispatch(new MakeVtourMultires($cmd));
-            UploadImage::create([
+            UploadImage::create(
+                [
                     'user_id' => $user_id,
                     'link' => $url,
                     'download' => $download,
@@ -114,9 +118,43 @@ class UploadController extends Controller
                 'path' => $path,
                 'size_no' => $size_no
             ]);
-         } else {
+        } else {
             return $this->errorJsonResponse(400, 'An unknown error occurred， You must check your requrest!');
         }
+    }
+
+    public function getFileId(Request $request)
+    {
+        info("request: {$request->header('User-Id')}");
+        info("request: {$request->header('Order-No')}");
+        $string = str_random(10);
+        if (!empty($request->header('User-Id'))) {
+            $user_id = $request->header('User-Id');
+        } else {
+            $user_id = $request->user()->id;
+        }
+
+        if (!empty($request->header('Order-No'))) {
+            $order_no = $request->header('Order-No');
+        } else {
+            $order_no = "";
+        }
+        $path = 'vr/file/' . $user_id .'/' . $string;
+        $origin = config('app.url');
+
+        info("user_id: $user_id");
+        info("order_no: $order_no");
+
+        $url = $origin . "/storage/" . $path . "/vtour/";
+        $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
+
+        return $this->successJsonResponse([
+            'url' => $url,
+            'download' => $download,
+            'order_no' => $order_no,
+            'key' => $string,
+            'path' => $path,
+        ]);
     }
 
     // public function deleteFile(Request $request)

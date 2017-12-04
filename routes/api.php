@@ -29,5 +29,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Route::post('/upload/image', 'UploadController@storeImage');
     Route::post('/upload/file', 'UploadController@storeFile');
+    Route::get('/upload/file_id', 'UploadController@getFileId');
     // Route::post('/upload/delete', 'UploadController@deleteFile');
 });
