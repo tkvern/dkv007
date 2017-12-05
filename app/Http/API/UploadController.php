@@ -10,6 +10,7 @@ use App\Models\UploadImage;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Jobs\MakeVtourMultires;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -147,6 +148,21 @@ class UploadController extends Controller
 
         $url = $origin . "/storage/" . $path . "/vtour/";
         $download = $origin . "/storage/" . $path . "/" . $string . ".jpeg";
+
+        Storage::disk('public')->put($path . '/vtour/index.html', '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>量子视觉云</title>
+        </head>
+        <body>
+            <h2></h2>
+            <p>资源正在处理中...</p>
+            <p>请稍后访问</p>
+        </body>
+        </html>');
 
         return $this->successJsonResponse([
             'url' => $url,
