@@ -32,7 +32,7 @@ class MakeVtourMultires implements ShouldQueue
     public function handle()
     {
         $root_path = "/mnt/vdb1/mkpano/krpano-1.19-pr10";
-        $cmd = $root_path . " " . $this->$inputPath . " ";
+        $cmd = $root_path . "/make.sh " . $this->$inputPath . " ";
         info("job exec: {$cmd}");
         exec($cmd, $output, $result);
         info("job status: $result");
