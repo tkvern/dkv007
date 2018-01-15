@@ -12,16 +12,16 @@ class MakeVtourMultires implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $cmd;
+    private $inputPath;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($cmd)
+    public function __construct($inputPath)
     {
         //
-        $this->cmd = $cmd;
+        $this->cmd = $inputPath;
     }
 
     /**
@@ -31,8 +31,10 @@ class MakeVtourMultires implements ShouldQueue
      */
     public function handle()
     {
-        info("job exec: {$this->cmd}");
-        exec($this->cmd, $output, $result);
+        $root_path = "/mnt/vdb1/mkpano/krpano-1.19-pr10";
+        $cmd = $root_path . " " . $this->$inputPath . " ";
+        info("job exec: {$cmd}");
+        exec($cmd, $output, $result);
         info("job status: $result");
     }
 }
