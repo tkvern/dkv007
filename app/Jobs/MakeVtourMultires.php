@@ -21,7 +21,7 @@ class MakeVtourMultires implements ShouldQueue
     public function __construct($inputPath)
     {
         //
-        $this->cmd = $inputPath;
+        $this->inputPath = $inputPath;
     }
 
     /**
