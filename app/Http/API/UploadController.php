@@ -95,10 +95,10 @@ class UploadController extends Controller
             }
 
             $preFix = "/mnt/vdb1/www/dkv007/storage/app/public/";
-            $inputPath = $preFix . $path;
+            $inputPath = $preFix . $path . "/*.jpeg";
             
-            $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
-            dispatch(new MakeVtourMultires($cmd));
+            // $cmd = "echo 0 | /mnt/vdb1/mkpano/krpano-1.19-pr10/krpanotools makepano -config=templates/vtour-multires.config {$inputPath}/*.jpeg";
+            dispatch(new MakeVtourMultires($inputPath));
             UploadImage::create(
                 [
                     'user_id' => $user_id,
